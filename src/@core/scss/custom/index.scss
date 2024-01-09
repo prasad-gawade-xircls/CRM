@@ -1,47 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
-.btn-primary, .btn-outline-primary, .btn-primary-main {
+.btn-primary, .btn-outline-primary {
     background: transparent !important;
     border: 1px solid #464646 !important;
     color: #000 !important;
-    transition: .2s ease-in-out;
 }
 
-// .btn-primary-main {
-//     background: #006aff !important;
-//     border: 1px solid #006aff !important;
-//     color: #fff !important;
-// }
+.btn-primary-main {
+    background: #006aff !important;
+    border: 1px solid #006aff !important;
+    color: #fff !important;
+}
 
 .btn-light-primary {
     background: #bbd4f8 !important;
     color: #006aff !important;
 }
 
-a.btn-primary, a.btn-outline-primary, a.btn-primary-main {
+a.btn-primary, a.btn-outline-primary {
     color: #464646 !important
 }
 
-// [dir] .btn-primary:focus, [dir] .btn-primary:active, [dir] .btn-primary.active, 
-// .btn-primary-main:focus, [dir] .btn-primary-main:active, [dir] .btn-primary-main.active
-// {
-// 	background-color: transparent !important;
-// }
+[dir] .btn-primary:focus, [dir] .btn-primary:active, [dir] .btn-primary.active {
+	background-color: transparent !important;
+}
 
-[dir] .btn-primary:hover:not(.disabled):not(:disabled), .btn-primary:focus, [dir] .btn-primary:active, [dir] .btn-primary.active, .btn-primary:focus, [dir] .btn-primary:active, [dir] .btn-primary.active, 
-.btn-primary-main:hover:not(.disabled):not(:disabled), .btn-primary-main:focus, [dir] .btn-primary-main:active, [dir] .btn-primary-main.active, .btn-primary-main:focus, [dir] .btn-primary-main:active, [dir] .btn-primary-main.active
-{
+[dir] .btn-primary:hover:not(.disabled):not(:disabled), .btn-primary:focus, [dir] .btn-primary:active, [dir] .btn-primary.active, .btn-primary:focus, [dir] .btn-primary:active, [dir] .btn-primary.active {
 	box-shadow: 0 4px 25px -8px #464646 !important;
-    background: #006aff !important;
-    border: 1px solid #006aff !important;
-    color: #fff !important;
+    background: transparent !important;
 }
 
 [dir] .btn:not(:disabled):not(.disabled):active:focus, [dir] .btn:not(:disabled):not(.disabled).active:focus {
 	box-shadow: 0 4px 25px -8px #464646 !important;
 }
 
-.btn-primary-main:hover, .btn-primary-main:hover {
+.btn-primary-main:hover {
     box-shadow: 0 8px 25px -8px #464646 !important;
 }
 
@@ -2258,6 +2251,4 @@ a.btn-primary, a.btn-outline-primary, a.btn-primary-main {
 
 
 // TOGGLE
-.css-1okebmr-indicatorSeparator {
-    display: none !important;
-}
+
