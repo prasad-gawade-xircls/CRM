@@ -192,8 +192,8 @@ export default function CustomerProfile() {
   const validateValues = (inputValues) => {
     console.log('validation ran')
     const errors = {}
-    if (!(inputValues.email) || inputValues.email.length < 15) {
-      errors.email = "Email is too short"
+    if (!(inputValues.email) || inputValues.email.length < 1) {
+      errors.email = "please enter valid Email"
     }
     else if (inputValues) {
       const inputValuesPhone = ['phone_no', 'phone_no2', 'landline1', 'landline2']

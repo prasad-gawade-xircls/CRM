@@ -87,7 +87,7 @@ const CustomerBasicPersonal = ({ allData }) => {
           <Col md={6} lg={4} className="mt-2">
             <label
               htmlFor="personalDetails-gender"
-              className="form-label"
+              className=""
               style={{ margin: "0px" }}
             >
               Gender
@@ -104,7 +104,7 @@ const CustomerBasicPersonal = ({ allData }) => {
           <Col md={6} lg={4} className="mt-2">
             <label
               htmlFor="personalDetails-marital-status"
-              className="form-label"
+              className=""
               style={{ margin: "0px" }}
             >
               Marital Status
@@ -121,14 +121,14 @@ const CustomerBasicPersonal = ({ allData }) => {
           <Col md={6} lg={4} className="mt-2">
             <label
               htmlFor="personalDetails-children"
-              className="form-label"
+              className=""
               style={{ margin: "0px" }}
             >
               Children
             </label>
             <Select
               id="personalDetails-children"
-              placeholder='Children?'
+              placeholder='Children'
               value={childrenOptions.find(option => option.value === formData?.children) ?? ''}
               onChange={(e) => handleInputChange(e, 'children')}
               options={childrenOptions}
@@ -155,7 +155,7 @@ const CustomerBasicPersonal = ({ allData }) => {
           <Col md={6} lg={4} className="mt-2">
             <label
               htmlFor="personalDetails-occupation"
-              className="form-label"
+              className=""
               style={{ margin: "0px" }}
             >
               Occupation
@@ -163,7 +163,7 @@ const CustomerBasicPersonal = ({ allData }) => {
             <Select
               id="personalDetails-children"
               options={occupationOptions}
-              placeholder='Select Occupation?'
+              placeholder='Select Occupation'
               value={occupationOptions.find(option => option.value === formData?.occupation) ?? ''}
               onChange={(e) => handleInputChange(e, 'occupation')}
               closeMenuOnSelect={true}

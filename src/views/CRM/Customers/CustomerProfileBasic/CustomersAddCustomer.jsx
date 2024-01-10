@@ -82,7 +82,7 @@ const CustomersAddCustomer = ({ allData }) => {
                   <h4 className="mb-0">Basic Details</h4>
                </Col>
                <Col md={6} lg={4} className="mt-1">
-                  <label htmlFor="basicDetails-title " className="form-label" style={{ margin: '0px' }}>
+                  <label htmlFor="basicDetails-title " className="" style={{ margin: '0px' }}>
                      Title
                   </label>
                   <Select
@@ -112,9 +112,9 @@ const CustomersAddCustomer = ({ allData }) => {
                      Email
                   </label>
                   <div >
-                     <input placeholder="Email" type='text' id='basicDetails-email' name='email' className="form-control" value={formData?.email ?? ''} onChange={handleInputChange} disabled={id} />
+                     <input placeholder="Email" type='email' id='basicDetails-email' name='email' className="form-control" value={formData?.email ?? ''} onChange={handleInputChange} disabled={id} />
                      <p className={`text-danger text-left m-0 font-small-1 ${errors.email ? '' : 'd-none'}`}>
-                        Email should be at least 15 characters long
+                        This field is required
                      </p>
                   </div>
                </Col>

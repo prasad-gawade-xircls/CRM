@@ -3,6 +3,7 @@ import { useState } from "react"
 import AdvanceServerSide from "@src/views/Components/DataTable/AdvanceServerSide.js"
 import { baseURL } from "@src/assets/auth/jwtService.js"
 import { Edit3, Eye, Trash2 } from "react-feather"
+import { Link } from "react-router-dom"
 
 /* eslint-disable */
 const Customers = () => {
@@ -49,7 +50,9 @@ const Customers = () => {
     {
       name: "Customer Name",
       minWidth: "200px",
-      selector: (row) => row?.finance_customer_name,
+      selector: (row) =>(
+        <Link to={`view_customer/27527`}>{row?.finance_customer_name}</Link>
+      ) ,
       type: 'text',
       isEnable: true
     },
@@ -92,7 +95,7 @@ const Customers = () => {
       name: "Disburse Date",
       minWidth: "200px",
       selector: (row) => row?.finance_loan_disbursement_date,
-      type: 'text',
+      type: 'date',
       isEnable: true
     },
     {

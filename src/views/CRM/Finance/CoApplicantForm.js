@@ -297,7 +297,7 @@ const CoApplicantForm = ({ formHandler }) => {
                         </label>
                         <Select
                             id="personalDetails-children"
-                            placeholder='Children?'
+                            placeholder='Children'
                             value={childrenOptions.find(option => option.value === formData?.children) ?? ''}
                             onChange={(e) => handleInputChange(e, 'children')}
                             options={childrenOptions}
@@ -362,7 +362,7 @@ const CoApplicantForm = ({ formHandler }) => {
                         <Select
                             id="personalDetails-occupation"
                             options={occupationOptions}
-                            placeholder='Select Occupation?'
+                            placeholder='Select Occupation'
                             value={occupationOptions.find(option => option.value === formData?.occupation) ?? ''}
                             onChange={(e) => handleInputChange(e, 'occupation')}
                             closeMenuOnSelect={true}

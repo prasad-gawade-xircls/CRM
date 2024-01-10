@@ -6,6 +6,7 @@ import { Edit3, Eye, Trash2 } from "react-feather"
 import { LuTrendingUp } from "react-icons/lu"
 import { LiaUserSlashSolid, LiaUserSolid } from "react-icons/lia"
 import { PiMoneyThin } from "react-icons/pi"
+import { Link } from "react-router-dom"
 
 /* eslint-disable */
 const Customers = () => {
@@ -54,7 +55,10 @@ const Customers = () => {
     {
       name: "Customer Name",
       minWidth: "200px",
-      selector: (row) => row?.finance_customer_name,
+      selector: (row) => (
+        <Link to={`view_customer/27527`}>{row?.finance_customer_name}</Link>
+      )
+      ,
       type: 'text',
       isEnable: true
     },

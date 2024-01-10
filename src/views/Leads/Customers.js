@@ -25,7 +25,7 @@ const Customers = () => {
     // form_data.append("start", "1")
     Object.entries(advanceSearchValue).map(([key, value]) => value && form_data.append(key, value))
     form_data.append("slug", "customer_data")
-    form_data.append("table_name", "overAll_finance")
+    // form_data.append("table_name", "overAll_finance")
     form_data.append("page", currentPage + 1)
     form_data.append("size", currentEntry)
     form_data.append("searchValue", searchValue)
@@ -38,7 +38,7 @@ const Customers = () => {
       .then((data) => data.json())
       .then((resp) => {
         setCustData(resp.success)
-        console.log("hh", resp.success.customer_details_obj)
+        console.log("hh", resp.success)
         setTableData(resp.success.customer_details_obj)
         setIsLoading(false)
       })
@@ -58,7 +58,10 @@ const Customers = () => {
     {
       name: "Customer Name",
       minWidth: "200px",
-      selector: (row) => row?.customer_details_customer_name,
+      selector: (row) => (
+        <Link to={`view_customer/27527`}>{row?.customer_details_customer_name}</Link>
+      )
+      ,
       type: 'text',
       isEnable: true
     },
@@ -80,7 +83,7 @@ const Customers = () => {
       name: "Email",
       minWidth: "200px",
       selector: (row) => row?.customer_details_email,
-      type: 'text',
+      type: 'email',
       isEnable: true
     },
     {
@@ -141,13 +144,13 @@ const Customers = () => {
       <Card>
         <CardHeader>
           <div className="d-flex justify-content-between w-100">
-            <h2 className="fw-bolder">Customer Dashboard</h2>
-            <div className="d-flex">
-              <Link to="/merchant/customers/add_customer">
-                <Button color="btn btn-primary text-nowrap">Add Customer</Button>
+            <h4 className="">Customer Dashboard</h4>
+            <div className="pe-2 d-flex">
+              <Link to="/merchant/customers/add_customer/">
+                <Button className="btn btn-outline-primary btn-block">Add Customer</Button>
               </Link>
               <div
-                className="ms-1 px-1 bg-success justify-content-center align-items-center d-flex rounded h-100 w-100"
+                className="ps-2 justify-content-center align-items-center d-flex"
               // style={{ width: "50px", height: "50px" }}
               >
                 <IoSettingsOutline color="black" size={20} />

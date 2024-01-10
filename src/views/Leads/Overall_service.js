@@ -6,6 +6,7 @@ import { Edit3, Eye, Trash2 } from "react-feather"
 import { LuTrendingUp } from "react-icons/lu"
 import { LiaUserSlashSolid, LiaUserSolid } from "react-icons/lia"
 import { PiMoneyThin } from "react-icons/pi"
+import { Link } from "react-router-dom"
 
 /* eslint-disable */
 const Customers = () => {
@@ -53,7 +54,9 @@ const Customers = () => {
       name: "Customer Name",
       minWidth: "150px",
       selector: (row) => (
-        row?.servicing_customer_name
+        <Link to={`view_customer/27527`}>{row?.servicing_customer_name}</Link>
+        
+        
         ),
       type: 'text',
       isEnable: true
@@ -90,21 +93,21 @@ const Customers = () => {
       name: "Job Card Date",
       minWidth: "200px",
       selector: (row) => row?.servicing_job_card_date,
-      type: 'text',
+      type: 'date',
       isEnable: true
     },
     {
       name: "Service Invoice Date",
       minWidth: "200px",
       selector: (row) => row?.servicing_service_invoice_date,
-      type: 'text',
+      type: 'date',
       isEnable: true
     },
     {
       name: "Service Expiry Date",
       minWidth: "200px",
       selector: (row) => row?.servicing_service_expiry_date,
-      type: 'text',
+      type: 'date',
       isEnable: true
     },
     {

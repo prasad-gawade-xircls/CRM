@@ -464,7 +464,7 @@ const AddServicing = () => {
                             Vehicle Number
                         </label>
                         <Select
-                            placeholder='Vehicle Insurance'
+                            placeholder='Vehicle Number'
                             id="vehicle-name"
                             options={vehicleOptions}
                             // defaultValue={vehicleOptions[0]}

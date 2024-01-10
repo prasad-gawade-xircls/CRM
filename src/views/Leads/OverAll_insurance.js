@@ -51,7 +51,7 @@ const Customers = () => {
       name: "Customer Name",
       minWidth: "150px",
       selector: (row) => (
-        row?.customer_name
+        <Link to={`view_customer/27527`}>{row?.customer_name}</Link>
       ),
       type: 'text',
       isEnable: true
@@ -95,14 +95,14 @@ const Customers = () => {
       name: "Policy Purchase Date",
       minWidth: "200px",
       selector: (row) => row?.policy_purchase_date,
-      type: 'text',
+      type: 'date',
       isEnable: true
     },
     {
       name: "Policy Expiry Date",
       minWidth: "200px",
       selector: (row) => row?.policy_expiry_date,
-      type: 'text',
+      type: 'date',
       isEnable: true
     },
     {

@@ -521,7 +521,7 @@ const AddInsurance = () => {
                     <h4 className="mb-0">Add Customer</h4>
                 </Col>
                 <Col md={12} className="mt-2">
-                    <label htmlFor="basicDetails-title" className="form-label" style={{ margin: '0px' }}>
+                    <label htmlFor="basicDetails-title" className="" style={{ margin: '0px' }}>
                         Title
                     </label>
                     <Select
@@ -694,7 +694,7 @@ const AddInsurance = () => {
                 </Col>
 
                 <Col md={12} className="mt-2">
-                    <label htmlFor="vehicle-type" className="form-label" style={{ margin: '0px' }}>
+                    <label htmlFor="vehicle-type" className="" style={{ margin: '0px' }}>
                         Vehicle Type
                     </label>
                     <Select
@@ -707,7 +707,7 @@ const AddInsurance = () => {
                     />
                 </Col>
                 <Col md={12} className="mt-2">
-                    <label htmlFor="brand-select" className="form-label" style={{ margin: '0px' }}>
+                    <label htmlFor="brand-select" className="" style={{ margin: '0px' }}>
                         Select Brand
                     </label>
                     <AsyncSelect
@@ -722,7 +722,7 @@ const AddInsurance = () => {
                 </Col>
 
                 <Col md={12} className="mt-2">
-                    <label htmlFor="model-select" className="form-label" style={{ margin: '0px' }}>
+                    <label htmlFor="model-select" className="" style={{ margin: '0px' }}>
                         Select Model
                     </label>
                     <Select
@@ -735,7 +735,7 @@ const AddInsurance = () => {
                     />
                 </Col>
                 <Col md={12} className="mt-2">
-                    <label htmlFor="variant-select" className="form-label" style={{ margin: '0px' }}>
+                    <label htmlFor="variant-select" className="" style={{ margin: '0px' }}>
                         Select Variant
                     </label>
                     <Select
@@ -809,7 +809,7 @@ const AddInsurance = () => {
                                         <h4 className="mb-0">Applicant Details</h4>
                                     </Col>
                                     <Col md={6} className="mt-2" style={{ zIndex: '9' }}>
-                                        <label htmlFor="customer-name" className="form-label" style={{ margin: '0px' }}>
+                                        <label htmlFor="customer-name" className="" style={{ margin: '0px' }}>
                                             Customer Name
                                         </label>
                                         {/* <AsyncSelect
@@ -842,7 +842,7 @@ const AddInsurance = () => {
                                         />
                                     </Col>
                                     <Col md={6} className="mt-2">
-                                        <label htmlFor="insurance-type" className="form-label" style={{ margin: '0px' }}>
+                                        <label htmlFor="insurance-type" className="" style={{ margin: '0px' }}>
                                             Insurance Type
                                         </label>
                                         <Select
@@ -856,7 +856,7 @@ const AddInsurance = () => {
                                     </Col>
                                     {(formData?.insurance_type === 'Motor' || formData?.insurance_type === 'Lease Car') && <>
                                         <Col md={6} className="mt-2">
-                                            <label htmlFor="product-name" className="form-label" style={{ margin: '0px' }}>
+                                            <label htmlFor="product-name" className="" style={{ margin: '0px' }}>
                                                 Product Name
                                             </label>
                                             <Select
@@ -870,7 +870,7 @@ const AddInsurance = () => {
                                             />
                                         </Col>
                                         <Col md={6} className="mt-2">
-                                            <label htmlFor="Vehicle-type" className="form-label" style={{ margin: '0px' }}>
+                                            <label htmlFor="Vehicle-type" className="" style={{ margin: '0px' }}>
                                                 Vehicle Type
                                             </label>
                                             <Select

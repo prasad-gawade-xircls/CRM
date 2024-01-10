@@ -560,6 +560,13 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
     {newCompanyPage === 1 && (
       <Row className="">
         <Col md={12} className="mt-2">
+          <div className="form-check mb-1">
+            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" defaultChecked />
+            <label className="form-check-label" htmlFor="flexCheckChecked">
+              Checked checkbox
+            </label>
+          </div>
+
           <label htmlFor="basicDetails-companyName">Company Name</label>
           <input
             required
