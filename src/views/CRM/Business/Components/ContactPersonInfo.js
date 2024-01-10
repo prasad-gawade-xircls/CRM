@@ -454,8 +454,8 @@ const ContactPersonInfo = ({ allData }) => {
                   className="form-control"
                   aria-label=""
                   name="social_twitter"
-                // value={formData?.social_twitter ?? ''}
-                // onChange={handleInputChange}
+                value={formData?.social_twitter ?? ''}
+                onChange={handleInputChange}
                 />
               </div>
             </Col>
@@ -471,8 +471,8 @@ const ContactPersonInfo = ({ allData }) => {
                   className="form-control"
                   aria-label=""
                   name="social_fb"
-                // value={formData?.social_fb ?? ''}
-                // onChange={handleInputChange}
+                value={formData?.social_fb ?? ''}
+                onChange={handleInputChange}
                 />
               </div>
             </Col>
@@ -488,8 +488,8 @@ const ContactPersonInfo = ({ allData }) => {
                   className="form-control"
                   aria-label=""
                   name="social_insta"
-                // value={formData?.social_insta ?? ''}
-                // onChange={handleInputChange}
+                value={formData?.social_insta ?? ''}
+                onChange={handleInputChange}
                 />
               </div>
             </Col>

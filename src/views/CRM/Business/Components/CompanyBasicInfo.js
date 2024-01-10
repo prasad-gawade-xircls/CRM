@@ -27,8 +27,8 @@ const CompanyBasicInfo = ({ allData }) => {
                 type="checkbox"
                 id="mark-company"
                 className="form-check-input"
-                name="parentCompany"
-                checked={formData?.parentCompany}
+                name="mark_parent"
+                checked={formData?.mark_parent}
                 onChange={handleInputChange}
               />
               <label htmlFor="mark-company">Mark as Parent Company</label>
@@ -37,11 +37,11 @@ const CompanyBasicInfo = ({ allData }) => {
         </Col>
         <Col md={6} lg={4} className="mt-1">
           <label htmlFor="company-name ">
-            Name
+            Company Name
           </label>
-          <input placeholder="Company Name" type='text' id='company-name' name='cust_first_name' className="form-control "
-          // value={formData?.cust_first_name ?? ''} 
-          // onChange={handleInputChange}
+          <input placeholder="Company Name" type='text' id='company-name' name='company_name' className="form-control "
+            value={formData?.company_name ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
@@ -49,53 +49,53 @@ const CompanyBasicInfo = ({ allData }) => {
             Industry
           </label>
           <input placeholder="Industry" type='text' id='industry' name='industry' className="form-control "
-          // value={formData?.industry ?? ''} 
-          // onChange={handleInputChange}
+            value={formData?.industry ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
           <label htmlFor="GSTIN-Number">
             GSTIN Number
           </label>
-          <input placeholder="GSTIN Number" type='text' id='GSTIN-Number' name='gst' className="form-control "
-          // value={formData?.gst ?? ''} 
-          // onChange={handleInputChange}
+          <input placeholder="GSTIN Number" type='text' id='GSTIN-Number' name='company_gst' className="form-control "
+            value={formData?.company_gst ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
           <label htmlFor="PAN-Card-Number">
             PAN Card Number
           </label>
-          <input placeholder="PAN Card Number" type='text' id='PAN-Card-Number' name='gst' className="form-control "
-          // value={formData?.gst ?? ''} 
-          // onChange={handleInputChange}
+          <input placeholder="PAN Card Number" type='text' id='PAN-Card-Number' name='company_pancard' className="form-control "
+            value={formData?.company_pancard ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
           <label htmlFor="Company-Phone">
             Company Phone
           </label>
-          <input placeholder="Company Phone" type='tel' maxLength={10} id='Company-Phone' name='gst' className="form-control "
-          // value={formData?.gst ?? ''} 
-          // onChange={handleInputChange}
+          <input placeholder="Company Phone" type='tel' maxLength={10} id='Company-Phone' name='company_phone' className="form-control "
+            value={formData?.company_phone ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
           <label htmlFor="Company-Email">
             Company Email
           </label>
-          <input placeholder="Company Email" type='text' id='Company-Email' name='gst' className="form-control "
-          // value={formData?.gst ?? ''} 
-          // onChange={handleInputChange}
+          <input placeholder="Company Email" type='text' id='Company-Email' name='company_email' className="form-control "
+            value={formData?.company_email ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
           <label htmlFor="Company-Website">
             Company Website
           </label>
-          <input placeholder="Company Website" type='text' id='Company-Website' name='gst' className="form-control "
-          // value={formData?.gst ?? ''} 
-          // onChange={handleInputChange}
+          <input placeholder="Company Website" type='text' id='Company-Website' name='company_website' className="form-control "
+            value={formData?.company_website ?? ''}
+            onChange={handleInputChange}
           />
         </Col>
         <Col md={6} lg={4} className="mt-1">
@@ -106,12 +106,12 @@ const CompanyBasicInfo = ({ allData }) => {
             id="relation"
             options={relationOptions}
             closeMenuOnSelect={true}
-          // value={relationOptions.find(option => option.value === formData.relation) ?? ''}
-          // onChange={(e) => handleInputChange(e, 'relation')}
+            value={relationOptions.find(option => option.value === formData.type) ?? ''}
+            onChange={(e) => handleInputChange(e, 'type')}
           />
         </Col>
       </Row>
-      {!formData.parentCompany &&
+      {!formData.mark_parent &&
         <Row className="mt-2">
           <Col md={12} >
             <h4 className="mb-0">Parent Company Details</h4>
@@ -120,63 +120,63 @@ const CompanyBasicInfo = ({ allData }) => {
             <label htmlFor="company-name2">
               Name
             </label>
-            <input placeholder="Company Name" type='text' id='company-name2' name='cust_first_name' className="form-control "
-            // value={formData?.cust_first_name ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="Company Name" type='text' id='company-name2' name='par_company_name' className="form-control "
+              value={formData?.par_company_name ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
           <Col md={6} lg={4} className="mt-1">
             <label htmlFor="industry2">
               Industry
             </label>
-            <input placeholder="Industry" type='text' id='industry2' name='industry' className="form-control "
-            // value={formData?.industry ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="Industry" type='text' id='industry2' name='par_industry' className="form-control "
+              value={formData?.par_industry ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
           <Col md={6} lg={4} className="mt-1">
             <label htmlFor="GST-Number">
               GST Number
             </label>
-            <input placeholder="GST Number" type='text' id='GST-Number' name='gst' className="form-control "
-            // value={formData?.gst ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="GST Number" type='text' id='GST-Number' name='par_company_gst' className="form-control "
+              value={formData?.par_company_gst ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
           <Col md={6} lg={4} className="mt-1">
             <label htmlFor="Company-PAN-Card-Number">
               Company PAN Card Number
             </label>
-            <input placeholder="PAN Card Number" type='text' id='Company-PAN-Card-Number' name='gst' className="form-control "
-            // value={formData?.gst ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="PAN Card Number" type='text' id='Company-PAN-Card-Number' name='par_company_pancard_name' className="form-control "
+              value={formData?.par_company_pancard_name ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
           <Col md={6} lg={4} className="mt-1">
             <label htmlFor="Company-Phone2">
               Company Phone
             </label>
-            <input placeholder="Company Phone" type='tel' maxLength={10} id='Company-Phone2' name='gst' className="form-control "
-            // value={formData?.gst ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="Company Phone" type='tel' maxLength={10} id='Company-Phone2' name='par_company_phone' className="form-control "
+              value={formData?.par_company_phone ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
           <Col md={6} lg={4} className="mt-1">
             <label htmlFor="Company-Email2">
               Company Email
             </label>
-            <input placeholder="Company Email" type='text' id='Company-Email2' name='gst' className="form-control "
-            // value={formData?.gst ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="Company Email" type='text' id='Company-Email2' name='par_company_email' className="form-control "
+              value={formData?.par_company_email ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
           <Col md={6} lg={4} className="mt-1">
             <label htmlFor="Company-Website2">
               Company Website
             </label>
-            <input placeholder="Company Website" type='text' id='Company-Website2' name='gst' className="form-control "
-            // value={formData?.gst ?? ''} 
-            // onChange={handleInputChange}
+            <input placeholder="Company Website" type='text' id='Company-Website2' name='par_company_website' className="form-control "
+              value={formData?.par_company_website ?? ''}
+              onChange={handleInputChange}
             />
           </Col>
         </Row>

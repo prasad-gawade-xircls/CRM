@@ -122,10 +122,7 @@ const ContactPersonAddInfo = ({ allData }) => {
           </Col>
         </Row>
         <Row>
-          <Col
-            md={12}
-            className="mt-3 d-flex align-items-center justify-content-between"
-          >
+          <Col md={12} className="mt-3 d-flex align-items-center justify-content-between">
             <h4 className="mb-0">Shipping Address</h4>
             <span className="form-check form-check-success">
               <input
