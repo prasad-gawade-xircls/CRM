@@ -53,6 +53,11 @@ const AddServicing = () => {
             })
             .then((resp) => {
                 console.log("ResponseId:", resp.success[0])
+                if (resp.success.length === 0) {
+                    // navigate(`/merchant/customer/all_cust_dashboard/add_servicing/`)
+                    toast.error('Autofill is not available')
+                    return
+                }
                 const newObject = {};
                 for (const key in resp.success[0]) {
                     if (resp.success[0].hasOwnProperty(key) && resp.success[0][key] !== null) {
@@ -63,10 +68,10 @@ const AddServicing = () => {
                 setFormData(newObject)
                 setFormData(prefData => ({
                     ...prefData,
-                    job_card_date: prefData.job_card_date.substring(0, 10),
-                    service_expiry_date: prefData.service_expiry_date.substring(0, 10),
-                    service_invoice_date: prefData.service_invoice_date.substring(0, 10),
-                    updated_at: prefData.updated_at.substring(0, 10)
+                    job_card_date: prefData?.job_card_date.substring(0, 10),
+                    service_expiry_date: prefData?.service_expiry_date.substring(0, 10),
+                    service_invoice_date: prefData?.service_invoice_date.substring(0, 10),
+                    updated_at: prefData?.updated_at.substring(0, 10)
                 }))
             })
             .catch((error) => {
