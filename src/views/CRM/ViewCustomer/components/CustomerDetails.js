@@ -12,57 +12,14 @@ import { Image } from 'react-bootstrap'
 import userprofile from '../../assets/user_profile.jpg'
 import { User, Flag, Phone, Star, Send, Layout } from 'react-feather'
 import { baseURL } from '../../../../assets/auth/jwtService'
+import { useNavigate } from 'react-router-dom'
 // import axios from 'axios'
 // import { baseURL } from '../../../../assets/auth/jwtService'
 // import { useParams } from 'react-router-dom'
 
 const CustomerDetails = ({ userData }) => {
 
-    // const customerStatisticsData = [
-    //     {
-    //         name: "Total Sales",
-    //         data: 1907,
-    //         type: "number",
-    //         icon: <LuTrendingUp size={18} className="text-warning" />,
-    //         iconStyle: "bg-warning "
-    //     },
-    //     {
-    //         name: "Total Revenue",
-    //         data: 0,
-    //         type: "number",
-    //         icon: <LiaUserSolid size={18} className="text-info" />,
-    //         iconStyle: "bg-info "
-    //     },
-    //     {
-    //         name: <>Wallet <br />+</>,
-    //         data: 1907,
-    //         type: "number",
-    //         icon: <LiaUserSlashSolid size={18} className="text-danger" />,
-    //         iconStyle: "bg-danger "
-    //     },
-    //     {
-    //         name: "Balance To Pay",
-    //         data: 0,
-    //         type: "money",
-    //         icon: <PiMoneyThin size={18} className="text-success" />,
-    //         iconStyle: "bg-success "
-    //     },
-    //     {
-    //         name: "Reward Point",
-    //         data: 0,
-    //         type: "money",
-    //         icon: <PiMoneyThin size={18} className="text-success" />,
-    //         iconStyle: "bg-success "
-    //         // amount: true
-    //     },
-    //     {
-    //         name: "Loyalty Points Redeemed",
-    //         data: 0,
-    //         type: "money",
-    //         icon: <PiMoneyThin size={18} className="text-success" />,
-    //         iconStyle: "bg-success "
-    //     }
-    // ]
+    const navigate = useNavigate()
 
     const [activeTab, setActiveTab] = useState(0)
 
@@ -113,7 +70,7 @@ const CustomerDetails = ({ userData }) => {
                                         <div className='d-flex flex-column justify-content-center'>
                                             <h4>{userData?.title} {userData?.customer_name}</h4>
                                             <div><span className='font-small-4'>{userData?.email}</span></div>
-                                            <button type="button" className="btn btn-primary mt-1" style={{ width: "fit-content" }}>Edit</button>
+                                            <button type="button" className="btn btn-primary mt-1" style={{ width: "fit-content" }} onClick={() => navigate(`/merchant/customers/edit_customer/${userData.id}`)}>Edit</button>
                                         </div>
                                     </Col>
                                     <Col md='8' className='d-flex justify-content-end gap-5'>

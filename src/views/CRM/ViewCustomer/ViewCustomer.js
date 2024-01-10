@@ -29,7 +29,7 @@ const ViewCustomer = () => {
         form_data.append("edit_type", "is_customer_detail")
         axios.post(`${baseURL}/customers/merchant/get_view_customer/`, form_data)
             .then((res) => {
-                console.log("success", res.data.success[0])
+                console.log("123", res.data.success[0])
                 setUserData(res.data.success[0])
                 console.log("vehicle_data", res.data.vehicle_data)
                 setVehicalData(res.data.vehicle_data)

@@ -138,7 +138,7 @@ const InsuranceDetails = () => {
                                 selectedRows={selected}
                                 advanceFilter={false}
                                 create={true}
-                                createLink={"/"}
+                                createLink={"/merchant/customers/add-insurance/"}
                                 createText={"Add Insurance"}
                             />
                         </CardBody>

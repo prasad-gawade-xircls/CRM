@@ -41,7 +41,7 @@ const VehicleDetails = () => {
     const columns = [
         {
             name: "REGISTRATION NUMBER",
-            minWidth: "250px",
+            minWidth: "320px",
             selector: (row) => (
                 row?.registration_number !== undefined && row?.registration_number !== null ? row.registration_number : "None"
             ),
@@ -49,7 +49,7 @@ const VehicleDetails = () => {
         },
         {
             name: "BRAND",
-            minWidth: "250px",
+            minWidth: "320px",
             selector: (row) => (
                 row?.brand !== undefined && row?.brand !== null ? row.brand : "None"
             ),
@@ -57,7 +57,7 @@ const VehicleDetails = () => {
         },
         {
             name: "ENGINE NO",
-            minWidth: "250px",
+            minWidth: "320px",
             selector: (row) => (
                 row?.engine_no !== undefined && row?.engine_no !== null ? row.engine_no : "None"
             ),
@@ -65,7 +65,7 @@ const VehicleDetails = () => {
         },
         {
             name: "VARIANT",
-            minWidth: "250px",
+            minWidth: "320px",
             selector: (row) => (
                 row?.variant !== undefined && row?.variant !== null ? row.variant : "None"
             ),
@@ -74,12 +74,12 @@ const VehicleDetails = () => {
 
         {
             name: "ACTION",
-            minWidth: "80px",
+            minWidth: "50px",
             selector: () => (
                 <>
-                    <div className='d-flex justify-content-center align-items-center gap-2 w-100'>
-                        <Eye size='17px' />
-                        <Edit size='17px' />
+                    <div className='d-flex justify-content-center align-items-center gap-2'>
+                        <Eye size='17px' style={{cursor: "pointer"}} />
+                        <Edit size='17px' style={{cursor: "pointer"}}/>
                     </div>
                 </>
             ),
