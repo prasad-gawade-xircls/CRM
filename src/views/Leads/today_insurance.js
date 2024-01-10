@@ -1,4 +1,4 @@
-import {  Col, Row, Card, CardBody, CardHeader, Button} from "reactstrap"
+import { Col, Row, Card, CardBody, CardHeader, Button } from "reactstrap"
 import { useState } from "react"
 import AdvanceServerSide from "@src/views/Components/DataTable/AdvanceServerSide.js"
 import { baseURL } from "@src/assets/auth/jwtService.js"
@@ -11,7 +11,7 @@ import { Link } from "react-router-dom"
 /* eslint-disable */
 const Customers = () => {
   const [tableData, setTableData] = useState([])
-  const [custData, setCustData ] = useState({})
+  const [custData, setCustData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [selected, setSelected] = useState([])
 
@@ -42,20 +42,19 @@ const Customers = () => {
         setIsLoading(false)
       })
 
-    }
+  }
 
-//   useEffect(() => {
-//     getData()
-//   }, [])
+  //   useEffect(() => {
+  //     getData()
+  //   }, [])
 
-const columns = [
+  const columns = [
     {
       name: "Customer Name",
       minWidth: "150px",
       selector: (row) => (
-        <Link to={`view_customer/27527`}>{row?.customer_name}</Link>
-        
-        ),
+        <Link to={`/merchant/customers/view_customer/${row?.customer_id}`}>{row?.customer_name}</Link>
+      ),
       type: 'text',
       isEnable: true
     },
@@ -120,9 +119,9 @@ const columns = [
       width: "130px",
       selector: (row) => (
         <div className="d-flex ms-1 justify-content-center align-items-center text-center gap-1">
-          <Eye size={15}/>
-          <Edit3  size={15}/>
-          <Trash2 size={15}/>
+          <Link to={`/merchant/customers/view_customer/${row?.customer_id}`}><Eye size={15} /></Link>
+          <Link to={`edit_insurance/${row?.customer_id}`}> <Edit3 size={15} /></Link>
+          <Trash2 size={15} />
         </div>
       )
     }
@@ -145,7 +144,7 @@ const columns = [
     },
     {
       name: "Total Customers Insured",
-      data: custData.total_customers      ,
+      data: custData.total_customers,
       type: "number",
       icon: <LiaUserSlashSolid size={30} className="text-danger" />,
       iconStyle: "bg-danger bg-opacity-25"
@@ -163,7 +162,7 @@ const columns = [
   return (
     <>
 
-<Card>
+      <Card>
         <CardHeader>
           <Row className="mb-2">
             <h4 className="">Statistics</h4>
@@ -210,7 +209,7 @@ const columns = [
                 selectableRows={true}
                 setSelectedRows={setSelected}
                 selectedRows={selected}
-                advanceFilter={true}
+                isadvance={true}
               />
             </CardBody>
           </Card>

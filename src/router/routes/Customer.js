@@ -109,7 +109,7 @@ const Customers_Routes = [
     element: <Insurance />
   },
   {
-    path: '/merchant/customers/insurance/view_customer/:id',
+    path: '/merchant/customers/view_customer/:id',
     element: <ViewCustomer />
   },
   // --------------------------------

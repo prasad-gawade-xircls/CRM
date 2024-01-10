@@ -530,6 +530,7 @@ const AddInsurance = () => {
                         closeMenuOnSelect={true}
                         value={titleOptions.find(option => option.value === customerFormData.title) ?? ''}
                         onChange={(e) => setCustomerFormData(prevData => ({ ...prevData, title: e.value }))}
+                        isDisabled={id}
                     />
                 </Col>
                 <Col md={12} className="mt-2">
@@ -539,7 +540,7 @@ const AddInsurance = () => {
                     <input placeholder="First Name" type='text' id='basicDetails-first-name' name='customer.cust_first_name' className="form-control"
                         value={customerFormData?.cust_first_name}
                         onChange={handleInputChange}
-
+                        isDisabled={id}
                     />
                 </Col>
                 <Col md={12} className="mt-2">
@@ -549,6 +550,7 @@ const AddInsurance = () => {
                     <input placeholder="Last Name" type='text' id='basicDetails-last-name' name='customer.cust_last_name' className="form-control"
                         value={customerFormData?.cust_last_name}
                         onChange={handleInputChange}
+                        isDisabled={id}
                     />
                 </Col>
                 <Col md={12} className="mt-2">
@@ -567,6 +569,7 @@ const AddInsurance = () => {
                     <input placeholder="Mobile Number" type='tel' maxLength={10} id='basicDetails-mobile' name='customer.phone_no' className="form-control"
                         value={customerFormData?.phone_no}
                         onChange={handleInputChange}
+                        isDisabled={id}
                     />
                 </Col>
                 <Col md={12} className="mt-2">

@@ -60,7 +60,7 @@ const Customers = () => {
       name: "Customer Name",
       minWidth: "200px",
       selector: (row) => (
-        <Link to={`view_customer/`}>{row?.customer_details_customer_name}</Link>
+        <Link to={`view_customer/${row?.customer_details_id}`}>{row?.customer_details_customer_name}</Link>
       )
       ,
       type: 'text',
@@ -99,8 +99,8 @@ const Customers = () => {
       minWidth: "50px",
       selector: (row) => (
         <div className="d-flex ms-1 justify-content-center align-items-center text-center gap-1">
-          <Eye size={15} />
-          <Edit3 size={15} />
+          <Link to={`view_customer/${row?.customer_details_id}`}><Eye size={15} /></Link>
+          <Link to={`edit_insurance/${row?.customer_details_id}`}> <Edit3 size={15} /></Link>
           <Trash2 size={15} />
         </div>
       )
