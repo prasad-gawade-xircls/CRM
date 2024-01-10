@@ -2,20 +2,25 @@ import React, { useState } from 'react'
 import { Card, CardBody, Col, FormGroup, Input, InputGroup, InputGroupText, Label, Row } from 'reactstrap'
 import { Edit } from 'react-feather'
 import toast from 'react-hot-toast'
+import { baseURL } from '../../../../assets/auth/jwtService'
 
 const IdentityProof = ({ AllFormData }) => {
-
   const { handleInputChange, userData, postData } = AllFormData
   const [editMode, setEditMode] = useState(false)
-  const [adharImageUrl, setAdharImageUrl] = useState(null)
-  const [panImageUrl, setPanImageUrl] = useState(null)
+
+  const adharImageUrlFromAPI = userData?.aadhar_pdf_file ? `${baseURL}/static/${userData.aadhar_pdf_file}` : null
+
+  const panImageUrlFromAPI = userData?.pan_pdf_file ? `${baseURL}/static/${userData.pan_pdf_file}` : null
+
+  const [adharImageUrl, setAdharImageUrl] = useState(adharImageUrlFromAPI)
+  const [panImageUrl, setPanImageUrl] = useState(panImageUrlFromAPI)
 
   const handleEditClick = () => {
     setEditMode(!editMode)
-  }
 
-  console.log(adharImageUrl
-    , "lp")
+    setAdharImageUrl(adharImageUrlFromAPI)
+    setPanImageUrl(panImageUrlFromAPI)
+  }
   return (
     <>
       <style>
