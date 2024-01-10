@@ -15,24 +15,20 @@ const ServicingDetails = () => {
     let serialNumber = 1
 
 
-    const getData = ({ advanceSearchValue, currentPage, currentEntry }) => {
+    const getData = () => {
         setIsLoading(true)
         const form_data = new FormData()
         const url = new URL(`${baseURL}/customers/merchant/get_view_customer/`)
-        Object.entries(advanceSearchValue).map(([key, value]) => value && form_data.append(key, value))
-        form_data.append("id", id)
-        form_data.append("edit_type", "is_servicing")
-        form_data.append("page", (currentPage * currentEntry))
-        form_data.append("size", currentEntry)
-        form_data.append("start", (currentPage * currentEntry))
+        form_data.append("customer_id", id)
+        form_data.append("tab_type", "servicing")
         fetch(url, {
             method: "POST",
             body: form_data
         })
             .then((res) => res.json())
             .then((res) => {
-                console.log(res.success.servicing_obj, "kk")
-                setTableData(res.success.servicing_obj)
+                console.log(res.success, "kk")
+                setTableData(res.success)
 
                 setIsLoading(false)
             })
@@ -54,7 +50,7 @@ const ServicingDetails = () => {
             name: <>CUSTOMER <br /> NAME</>,
             minWidth: "240px",
             selector: (row) => (
-                row?.servicing_customer_name ? row.servicing_customer_name : 'None'
+                row?.customer_name !== undefined && row?.customer_name !== null ? row.customer_name : "None"
             ),
             type: 'text'
         },
@@ -62,7 +58,7 @@ const ServicingDetails = () => {
             name: <>BRAND</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.servicing_brand ? row.servicing_brand : 'None'
+                row?.brand !== undefined && row?.brand !== null ? row.brand : "None"
             ),
             type: 'text'
         },
@@ -70,7 +66,7 @@ const ServicingDetails = () => {
             name: "MODEL",
             minWidth: "100px",
             selector: (row) => (
-                row?.servicing_car_model ? row.servicing_car_model : 'None'
+                row?.model !== undefined && row?.model !== null ? row.model : "None"
             ),
             type: 'text'
         },
@@ -78,7 +74,7 @@ const ServicingDetails = () => {
             name: <>VARIANT</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.servicing_variant ? row.servicing_variant : 'None'
+                row?.variant !== undefined && row?.variant !== null ? row.variant : "None"
             ),
             type: 'text'
         },
@@ -86,7 +82,7 @@ const ServicingDetails = () => {
             name: <>SERVICE<br />LOCATION</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.servicing_service_location ? row.servicing_service_location : 'None'
+                row?.service_location !== undefined && row?.service_location !== null ? row.service_location : "None"
             ),
             type: 'text'
         },
@@ -94,7 +90,7 @@ const ServicingDetails = () => {
             name: <>JOB CARD <br /> DATE</>,
             minWidth: "120px",
             selector: (row) => (
-                row?.servicing_job_card_date ? moment(row.servicing_job_card_date).format("YYYY-MM-DD") : "None"
+                row?.job_card_date !== undefined && row?.job_card_date !== null ? moment(row.job_card_date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'text'
         },
@@ -102,7 +98,7 @@ const ServicingDetails = () => {
             name: <>SERVICE INVOICE<br /> DATE</>,
             minWidth: "150px",
             selector: (row) => (
-                row?.servicing_service_expiry_date ? moment(row.servicing_service_expiry_date).format("YYYY-MM-DD") : "None"
+                row?.service_invoice_date !== undefined && row?.service_invoice_date !== null ? moment(row.service_invoice_date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'text'
         },
@@ -110,7 +106,7 @@ const ServicingDetails = () => {
             name: <>SERVICE EXPIRY<br />DATE </>,
             minWidth: "150px",
             selector: (row) => (
-                row?.servicing_service_invoice_date ? moment(row.servicing_service_invoice_date).format("YYYY-MM-DD") : "None"
+                row?.service_expiry_date !== undefined && row?.service_expiry_date !== null ? moment(row.service_expiry_date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'text'
         },
@@ -118,7 +114,9 @@ const ServicingDetails = () => {
             name: <>SERVICE INVOICE <br /> AMOUNT</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.servicing_service_invoice_amount ? row.servicing_service_invoice_amount : "None"),
+                row?.service_invoice_amount !== undefined && row?.service_invoice_amount !== null ? row.service_invoice_amount : "None"
+            ),
+
             type: 'text'
         }
 
@@ -143,7 +141,7 @@ const ServicingDetails = () => {
                                 selectableRows={true}
                                 setSelectedRows={setSelected}
                                 selectedRows={selected}
-                                advanceFilter={true}
+                                advanceFilter={false}
                                 create={true}
                                 createLink={"/"}
                                 createText={"Add Servicing"}

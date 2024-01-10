@@ -9,10 +9,9 @@ import { IoMdCheckmark } from "react-icons/io"
 import { SlFlag } from "react-icons/sl"
 import { IoCallOutline } from "react-icons/io5"
 import { Image } from 'react-bootstrap'
+import userprofile from '../../assets/user_profile.jpg'
 import { User, Flag, Phone, Star, Send, Layout } from 'react-feather'
 import { baseURL } from '../../../../assets/auth/jwtService'
-import userprofile from '../../assets/user_profile.jpg'
-
 // import axios from 'axios'
 // import { baseURL } from '../../../../assets/auth/jwtService'
 // import { useParams } from 'react-router-dom'
@@ -104,7 +103,7 @@ const CustomerDetails = ({ userData }) => {
                         <CardBody>
                             <div>
                                 <Row className='d-flex justify-content-between'>
-                                    <Col md='8' className=' d-flex gap-2 justify-content-start align-items-center' style={{ height: "fit-content" }}>
+                                    <Col md='4' className=' d-flex gap-2 justify-content-start align-items-center' style={{ height: "fit-content" }}>
                                         {
                                             userData?.user_profile_img ? (
                                                 <Image src={`${baseURL}/static${userData?.user_profile_img}`} className="img-thumbnail" style={{ height: '104px' }} />
@@ -117,30 +116,42 @@ const CustomerDetails = ({ userData }) => {
                                             <button type="button" className="btn btn-primary mt-1" style={{ width: "fit-content" }}>Edit</button>
                                         </div>
                                     </Col>
-                                    <Col md='4' className='d-flex flex-column'>
+                                    <Col md='8' className='d-flex justify-content-end gap-5'>
+                                        <div className='d-flex gap-3 align-items-center mt-1 justify-content-end'>
+                                            <div className='d-flex flex-column gap-1'>
+                                                <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Phone size='16px' />Contact</span>
+                                                <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Star size='16px' />Status</span>
+                                                <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Star size='16px' />Type</span>
+                                                <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Flag size='16px' />Country</span>
+                                            </div>
+                                            <div className='d-flex flex-column gap-1'>
+                                                <div><span className='font-small-4'>{userData?.phone_no}</span></div>
+                                                <div><span className='font-small-4'>Inactive</span></div>
+                                                <div><span className='font-small-4'>Regular</span></div>
+                                                <div><span className='font-small-4'>{userData?.country}</span></div>
+                                            </div>
+                                        </div>
+
                                         <div className='d-flex gap-3 align-items-center mt-1 justify-content-end'>
                                             <div className='d-flex flex-column gap-1'>
                                                 <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><User size='16px' />Full name</span>
                                                 <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Star size='16px' />Status</span>
                                                 <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Star size='16px' />Type</span>
                                                 <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Flag size='16px' />Country</span>
-                                                <span className='d-flex gap-2 align-items-center fs-6 fw-bold'><Phone size='16px' />Contact</span>
                                             </div>
                                             <div className='d-flex flex-column gap-1'>
                                                 <div> <span className='font-small-4'>{userData?.customer_name}</span></div>
                                                 <div><span className='font-small-4'>Inactive</span></div>
                                                 <div><span className='font-small-4'>Regular</span></div>
                                                 <div><span className='font-small-4'>{userData?.country}</span></div>
-                                                <div><span className='font-small-4'>{userData?.phone_no}</span></div>
                                             </div>
                                         </div>
                                     </Col>
                                 </Row>
 
-                                <Row className='pt-2'>
-                                    <Col md='9'>
+                                <Row className='mt-3'>
+                                    <Col md='12'>
                                         <Row>
-
                                             <Col md='2' className='d-flex gap-1 justify-content-center align-items-center'>
                                                 <div>
                                                     <div className='bg-warning bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
@@ -155,8 +166,8 @@ const CustomerDetails = ({ userData }) => {
 
                                             <Col md='2' className='d-flex gap-1 justify-content-center align-items-center'>
                                                 <div>
-                                                    <div className='bg-info bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
-                                                        <LiaUserSolid size={18} className="text-info" />
+                                                    <div className='bg-success bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
+                                                        <LiaUserSolid size={18} className="text-success" />
                                                     </div>
                                                 </div>
                                                 <div>
@@ -179,8 +190,8 @@ const CustomerDetails = ({ userData }) => {
 
                                             <Col md='2' className='d-flex gap-1 justify-content-center align-items-center'>
                                                 <div>
-                                                    <div className='bg-success bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
-                                                        <PiMoneyThin size={18} className="text-success" />
+                                                    <div className='bg-info bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
+                                                        <PiMoneyThin size={18} className="text-info" />
                                                     </div>
                                                 </div>
                                                 <div>
@@ -203,8 +214,8 @@ const CustomerDetails = ({ userData }) => {
 
                                             <Col md='2' className='d-flex gap-1 justify-content-center align-items-center'>
                                                 <div>
-                                                    <div className='bg-success bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
-                                                        <PiMoneyThin size={18} className="text-success" />
+                                                    <div className='bg-warning bg-opacity-25 d-flex justify-content-center align-items-center' style={{ width: "35px", height: "36px", borderRadius: "100%" }}>
+                                                        <PiMoneyThin size={18} className="text-warning" />
                                                     </div>
                                                 </div>
                                                 <div>

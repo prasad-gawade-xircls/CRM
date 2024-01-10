@@ -189,7 +189,7 @@ const AddInsurance = () => {
             .then((resp) => {
                 console.log("Response:", resp)
                     toast.success('Insurance saved successfully')
-                resp.is_edit_url ? navigate(`/merchant/customers/edit_insurance/${resp.insurance_code}`) : navigate(`/merchant/customer/all_cust_dashboard/add_insurance/`)
+                resp.is_edit_url ? navigate(`merchant/customers/insurance/edit_insurance/${resp.insurance_code}`) : navigate(`/merchant/customers/insurance/`)
                 fetchInsuranceData(resp.insurance_code)
             })
             .catch((error) => {

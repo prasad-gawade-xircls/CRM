@@ -4,17 +4,44 @@ import { Edit } from 'react-feather'
 import Select from 'react-select'
 
 const Address = ({ AllFormData }) => {
-
   const { handleInputChange, userData, postData } = AllFormData
   const [editMode, setEditMode] = useState(false)
+  const [sameBillingAddress, setSameBillingAddress] = useState(false)
 
   const handleEditClick = () => {
     setEditMode(!editMode)
   }
 
+  const handleSameBillingAddressChange = () => {
+    setSameBillingAddress(!sameBillingAddress)
+
+    // If checked, copy Billing Address to Shipping Address
+    if (!sameBillingAddress) {
+      handleInputChange({ target: { name: 'shipping_address1', value: userData.address_line1 } })
+      handleInputChange({ target: { name: 'shipping_address2', value: userData.address_line2 } })
+      handleInputChange({ target: { name: 'shipping_area_building', value: userData.area_building } })
+      handleInputChange({ target: { name: 'shipping_landmark', value: userData.landmark } })
+      handleInputChange({ target: { name: 'shipping_city', value: userData.city } })
+      handleInputChange({ target: { name: 'shipping_state', value: userData.state } })
+      handleInputChange({ target: { name: 'shipping_pincode', value: userData.pincode } })
+      handleInputChange({ target: { name: 'shipping_country', value: userData.country } })
+    } else {
+      
+      // If unchecked, clear Shipping Address fields
+      handleInputChange({ target: { name: 'shipping_address1', value: '' } })
+      handleInputChange({ target: { name: 'shipping_address2', value: '' } })
+      handleInputChange({ target: { name: 'shipping_area_building', value: '' } })
+      handleInputChange({ target: { name: 'shipping_landmark', value: '' } })
+      handleInputChange({ target: { name: 'shipping_city', value: '' } })
+      handleInputChange({ target: { name: 'shipping_state', value: '' } })
+      handleInputChange({ target: { name: 'shipping_pincode', value: '' } })
+      handleInputChange({ target: { name: 'shipping_country', value: null } })
+    }
+  }
+
   const country = [
-    { value: "india", label: "India" },
-    { value: "USA", label: "USA" }
+    { value: 'india', label: 'India' },
+    { value: 'USA', label: 'USA' }
   ]
   return (
     <>
@@ -22,13 +49,13 @@ const Address = ({ AllFormData }) => {
         {`
                 input::-webkit-outer-spin-button,
                 input::-webkit-inner-spin-button {
-                  -webkit-appearance: none !important;
-                  margin: 0;
+                  -webkit-appearance: none !important
+                  margin: 0
                 }
                 
                 /* Firefox */
                 input[type=number] {
-                  -moz-appearance: textfield;
+                  -moz-appearance: textfield
                 }
                 
             `}
@@ -173,6 +200,24 @@ const Address = ({ AllFormData }) => {
                       onChange={e => handleInputChange(e, 'country')}
                       value={country.find(option => option.value === userData.country)}
                       options={country}
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+
+              <Row>
+                <Col md='12' className='d-flex justify-content-end align-items-center'>
+                  <FormGroup className='d-flex justify-content-center align-items-start gap-1'>
+                    <Label for='sameBillingAddress' className='fs-6'>
+                      Same as Billing Address
+                    </Label>
+                    <Input
+                    className='form-control'
+                      id='sameBillingAddress'
+                      type='checkbox'
+                      checked={sameBillingAddress}
+                      onChange={handleSameBillingAddressChange}
+                      disabled={!editMode}
                     />
                   </FormGroup>
                 </Col>

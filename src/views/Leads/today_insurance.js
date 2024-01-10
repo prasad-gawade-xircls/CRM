@@ -117,7 +117,7 @@ const columns = [
     },
     {
       name: "Action",
-      minWidth: "50px",
+      width: "130px",
       selector: (row) => (
         <div className="d-flex ms-1 justify-content-center align-items-center text-center gap-1">
           <Eye size={15}/>

@@ -101,11 +101,13 @@ const BasicsDetails = () => {
             .then((resp) => {
                 console.log("Response:", resp)
                 toast.success('Customer saved successfully')
+                getUser()
             })
             .catch((error) => {
                 console.error("Error:", error)
                 if (error.message === 'Customer already exists') {
                     toast.error('Customer already exists')
+
                 } else {
                     toast.error('Failed to save customer')
                 }

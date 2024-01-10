@@ -84,11 +84,11 @@ const Customers_Routes = [
     element: <AddServicing/>
   },
   {
-    path: '/merchant/customers/edit_insurance/:id',
+    path: '/merchant/customers/insurance/edit_insurance/:id',
     element: <AddInsurance/>
   },
   {
-    path: '/merchant/customer/all_cust_dashboard/add_insurance/',
+    path: '/merchant/customers/insurance/',
     element: <Insurance />
   },
   {
@@ -109,7 +109,7 @@ const Customers_Routes = [
     element: <Insurance />
   },
   {
-    path: '/merchant/customers/view_customer/:id',
+    path: '/merchant/customers/insurance/view_customer/:id',
     element: <ViewCustomer />
   },
   // --------------------------------

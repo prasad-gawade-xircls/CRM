@@ -141,7 +141,7 @@ const Customers = () => {
     },
     {
       name: "Action",
-      minWidth: "200px",
+      width: "130px",
       selector: (row) => (
         <div className="d-flex ms-2 justify-content-center align-items-center text-center gap-3">
           <Edit3 size={15}/>

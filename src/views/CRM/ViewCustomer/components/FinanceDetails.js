@@ -5,6 +5,7 @@ import AdvanceServerSide from "@src/views/Components/DataTable/AdvanceServerSide
 import { baseURL } from '../../../../assets/auth/jwtService'
 import { useParams } from 'react-router-dom'
 import { Edit, Eye } from 'react-feather'
+import moment from 'moment'
 
 const FinanceDetails = () => {
 
@@ -15,24 +16,20 @@ const FinanceDetails = () => {
     let serialNumber = 1
 
 
-    const getData = ({ advanceSearchValue, currentPage, currentEntry }) => {
+    const getData = () => {
         setIsLoading(true)
         const form_data = new FormData()
         const url = new URL(`${baseURL}/customers/merchant/get_view_customer/`)
-        Object.entries(advanceSearchValue).map(([key, value]) => value && form_data.append(key, value))
-        form_data.append("id", id)
-        form_data.append("edit_type", "is_finance")
-        form_data.append("page", (currentPage * currentEntry))
-        form_data.append("size", currentEntry)
-        form_data.append("start", (currentPage * currentEntry))
+        form_data.append("customer_id", id)
+        form_data.append("tab_type", "finance")
         fetch(url, {
             method: "POST",
             body: form_data
         })
             .then((res) => res.json())
             .then((res) => {
-                console.log(res.success[0])
-                setTableData(res.success.finance_obj)
+                console.log(res.success[0], "pp")
+                setTableData(res.success)
                 setIsLoading(false)
             })
             .catch((error) => {
@@ -46,86 +43,86 @@ const FinanceDetails = () => {
         {
             name: "SR NO.",
             minWidth: "70px",
-            selector: () => serialNumber++, 
+            selector: () => serialNumber++,
             type: 'text'
         },
         {
-            name: <>VEHICLE <br/> NUMBER</>,
+            name: <>VEHICLE <br /> NUMBER</>,
             minWidth: "110px",
             selector: (row) => (
-                row?.finance_vehicle_details ? row.finance_vehicle_details : 'None'
+                row?.vehicle_number !== undefined && row?.vehicle_number !== null ? row.vehicle_number : "None"
             ),
             type: 'text'
         },
         {
-            name: <>BANK <br/> NAME</>,
+            name: <>BANK <br /> NAME</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.finance_Bank_Name ? row.finance_Bank_Name : 'None'
+                row?.Bank_Name !== undefined && row?.Bank_Name !== null ? row.Bank_Name : "None"
             ),
             type: 'text'
         },
         {
-            name: <>LOAN <br/> NUMBER</>,
+            name: <>LOAN <br /> NUMBER</>,
             minWidth: "110px",
             selector: (row) => (
-                row?.finance_Loan_Number ? row.finance_Loan_Number : 'None'
+                row?.Loan_Number !== undefined && row?.Loan_Number !== null ? row.Loan_Number : "None"
             ),
             type: 'text'
         },
         {
-            name: <>LOAN <br/> TYPE</>,
+            name: <>LOAN <br /> TYPE</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.finance_Loan_Type ? row.finance_Loan_Type : 'None'
+                row?.Loan_Type !== undefined && row?.Loan_Type !== null ? row.Loan_Type : "None"
             ),
             type: 'text'
         },
         {
-            name: <>DISBURSE <br/> DATE</>,
+            name: <>DISBURSE <br /> DATE</>,
             minWidth: "150px",
             selector: (row) => (
-                row?.finance_Loan_Disbursement_Date ? row.finance_Loan_Disbursement_Date : 'None'
+                row?.Loan_Disbursement_Date !== undefined && row?.Loan_Disbursement_Date !== null ? moment(row.Loan_Disbursement_Date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'date'
         },
         {
-            name: <>RATE OF <br/> INTEREST</>,
+            name: <>RATE OF <br /> INTEREST</>,
             minWidth: "110px",
             selector: (row) => (
-                row?.finance_Rate_of_Interest ? row.finance_Rate_of_Interest : 'None'
+                row?.Rate_of_Interest !== undefined && row?.Rate_of_Interest !== null ? row.Rate_of_Interest : "None"
             ),
             type: 'text'
         },
         {
-            name: <>LOAN <br/> AMOUNT</>,
+            name: <>LOAN <br /> AMOUNT</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.finance_Loan_amount ? row.finance_Loan_amount : 'None'
+                row?.Loan_amount !== undefined && row?.Loan_amount !== null ? row.Loan_amount : "None"
             ),
             type: 'text'
         },
         {
-            name: <>EMI <br/> AMOUNT</>,
+            name: <>EMI <br /> AMOUNT</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.finance_Emi_Amount ? row.finance_Emi_Amount : 'None'
+                row?.Emi_Amount !== undefined && row?.Emi_Amount !== null ? row.Emi_Amount : "None"
             ),
             type: 'text'
         },
         {
-            name: <>EMI START<br/>DATE</>,
+            name: <>EMI START<br />DATE</>,
             minWidth: "150px",
             selector: (row) => (
-                row?.finance_Emi_Start_Date ? row.finance_Emi_Start_Date : 'None'
+                row?.Emi_End_Date !== undefined && row?.Emi_End_Date !== null ? moment(row.Emi_End_Date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'date'
         },
         {
-            name: <>EMI END <br/> DATE</>,
+            name: <>EMI END <br /> DATE</>,
             minWidth: "150px",
             selector: (row) => (
-                row?.finance_Emi_End_Date ? row.finance_Emi_End_Date : 'None'
+                row?.Emi_Start_Date !== undefined && row?.Emi_Start_Date !== null ? moment(row.Emi_Start_Date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'date'
         },
@@ -134,10 +131,10 @@ const FinanceDetails = () => {
             minWidth: "80px",
             selector: () => (
                 <>
-                <div className='d-flex justify-content-center align-items-center gap-1'>
-                    <Eye size='15px'/>
-                    <Edit size='15px'/>
-                </div>
+                    <div className='d-flex justify-content-center align-items-center gap-1'>
+                        <Eye size='15px' />
+                        <Edit size='15px' />
+                    </div>
                 </>
             ),
             type: 'date'
@@ -160,7 +157,7 @@ const FinanceDetails = () => {
                                 selectableRows={true}
                                 setSelectedRows={setSelected}
                                 selectedRows={selected}
-                                advanceFilter={true}
+                                advanceFilter={false}
                                 create={true}
                                 createLink={"/"}
                                 createText={"Add Finance"}

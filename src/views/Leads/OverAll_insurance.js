@@ -31,9 +31,11 @@ const Customers = () => {
     })
       .then((data) => data.json())
       .then((resp) => {
-        console.log("hh", resp)
+        console.log("pp", resp)
         setTableData(resp.insurance)
+
         setIsLoading(false)
+
       })
       .catch((error) => {
         // console.log(error)
@@ -46,12 +48,13 @@ const Customers = () => {
   //     getData()
   //   }, [])
 
+
   const columns = [
     {
       name: "Customer Name",
       minWidth: "150px",
       selector: (row) => (
-        <Link to={`view_customer/27527`}>{row?.customer_name}</Link>
+        <Link to={`view_customer/${row?.customer_id}`}>{row?.customer_name}</Link>
       ),
       type: 'text',
       isEnable: true
@@ -114,11 +117,11 @@ const Customers = () => {
     },
     {
       name: "Action",
-      minWidth: "50px",
+      width: "130px",
       selector: (row) => (
         <div className="d-flex ms-1 justify-content-center align-items-center text-center gap-1">
-          <Eye size={15} />
-          <Link to={`/merchant/customers/edit_insurance/${row?.id}`}> <Edit3 size={15} /></Link>
+          <Link to={`view_customer/${row?.customer_id}`}><Eye size={15} /></Link>
+          <Link to={`edit_insurance/${row?.customer_id}`}> <Edit3 size={15} /></Link>
           <Trash2 size={15} />
         </div>
       )

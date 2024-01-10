@@ -1,15 +1,21 @@
 import React, { useState } from 'react'
 import { Card, CardBody, Col, FormGroup, Input, InputGroup, InputGroupText, Label, Row } from 'reactstrap'
 import { Edit } from 'react-feather'
+import toast from 'react-hot-toast'
 
 const IdentityProof = ({ AllFormData }) => {
 
   const { handleInputChange, userData, postData } = AllFormData
   const [editMode, setEditMode] = useState(false)
+  const [adharImageUrl, setAdharImageUrl] = useState(null)
+  const [panImageUrl, setPanImageUrl] = useState(null)
 
   const handleEditClick = () => {
     setEditMode(!editMode)
   }
+
+  console.log(adharImageUrl
+    , "lp")
   return (
     <>
       <style>
@@ -67,10 +73,31 @@ const IdentityProof = ({ AllFormData }) => {
                       name="aadhar_pdf_file"
                       type="file"
                       disabled={!editMode}
-                      onChange={(e) => handleInputChange(e, 'file')}
+                      onChange={(e) => {
+                        handleInputChange(e, 'file')
+                        const file = e.target.files[0]
+                        if (file && file.type.startsWith('image/')) {
+                          setAdharImageUrl(URL.createObjectURL(file))
+                        } else {
+                          toast.error('Please select image format')
+                        }
+                      }}
+
                     />
                   </FormGroup>
                 </Col>
+
+                {
+                  adharImageUrl
+                  && (
+                    <Col md='4' className='d-flex justify-content-center align-items-center mb-1'>
+                      <div>
+                        <img className='image_viewer' width="210px" height="110px" src={adharImageUrl} alt="Aadhar" />
+                      </div>
+                    </Col>
+                  )
+                }
+
               </Row>
 
               <Row>
@@ -100,10 +127,29 @@ const IdentityProof = ({ AllFormData }) => {
                       name="pan_pdf_file"
                       type="file"
                       disabled={!editMode}
-                      onChange={(e) => handleInputChange(e, 'file')}
+                      onChange={(e) => {
+                        handleInputChange(e, 'file')
+                        const file = e.target.files[0]
+                        if (file && file.type.startsWith('image/')) {
+                          setPanImageUrl(URL.createObjectURL(file))
+                        } else {
+                          toast.error('Please select image format')
+                        }
+                      }}
                     />
                   </FormGroup>
                 </Col>
+
+                {
+                  panImageUrl
+                  && (
+                    <Col md='4' className='d-flex justify-content-center align-items-center mt-1 mb-1'>
+                      <div>
+                        <img className='image_viewer' width="210px" height="110px" src={panImageUrl} alt="Pan" />
+                      </div>
+                    </Col>
+                  )
+                }
               </Row>
               <Row>
                 <Col md='12 d-flex justify-content-between mb-3'>

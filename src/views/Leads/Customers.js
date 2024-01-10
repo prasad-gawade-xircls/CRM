@@ -15,6 +15,7 @@ const Customers = () => {
   const [custData, setCustData] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [selected, setSelected] = useState([])
+  const [id, setId] = useState()
 
   const getData = (currentPage = 0, currentEntry = 10, searchValue = "", advanceSearchValue = {}) => {
     setIsLoading(true)
@@ -59,7 +60,7 @@ const Customers = () => {
       name: "Customer Name",
       minWidth: "200px",
       selector: (row) => (
-        <Link to={`view_customer/27527`}>{row?.customer_details_customer_name}</Link>
+        <Link to={`view_customer/`}>{row?.customer_details_customer_name}</Link>
       )
       ,
       type: 'text',

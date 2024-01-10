@@ -2,7 +2,7 @@
 import { Fragment, useCallback, useContext, useEffect, useState } from 'react'
 // ** Third Party Components
 import ReactPaginate from 'react-paginate'
-import { ArrowLeft, ChevronDown, File, FileText, Grid, Share, Sliders, Table, X } from 'react-feather'
+import { ArrowLeft, ChevronDown, File, FileText, Grid, Share, Sliders, X } from 'react-feather'
 import { useTranslation } from 'react-i18next'
 import DataTable from 'react-data-table-component'
 
@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom'
 // import { Link } from 'react-router-dom'
 // import { pageNo } from '../../Validator'
 
-const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpand, ExpandableTable, custom, isStyling, selectableRows = false, selectedRows, setSelectedRows, getData, exportUrl, viewAll, isExport, selectedContent, advanceFilter, viewType = "table", setViewType, viewContent, deleteContent, create, createLink, createText }) => {
+const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, custom, isStyling, selectableRows = false, selectedRows, setSelectedRows, getData, exportUrl, viewAll, isExport, selectedContent, advanceFilter, create, createLink, createText }) => {
   // ** State
   const [currentPage, setCurrentPage] = useState(0)
   const [currentEntry, setCurrentEntry] = useState(custom ? 5 : 10)
@@ -33,7 +33,6 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
   const { userPermission } = useContext(PermissionProvider)
   const [isadvance, setIsAdvance] = useState(false)
   const [advanceSearchValue, setAdvanceSearchValue] = useState({})
-  // const [advanceValue, setAdvanceValue] = useState({})
   const [isDownLoad, setIsDownLoad] = useState(false)
 
   const fileOptions = [
@@ -76,26 +75,20 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
     )
   }
 
-  // useEffect(() => {
-  //   // if (searchValue) {
-  //   const delay = 1000
-  //   const request = setTimeout(() => {
-  //     getData({ currentPage, currentEntry, advanceSearchValue, searchValue })
-  //   }, delay)
-
-  //   return () => {
-  //     clearTimeout(request)
-  //   }
-  //   // }
-  // }, [currentPage, currentEntry, advanceSearchValue, searchValue])
-
-
-  //------------------------
   useEffect(() => {
-    getData(currentPage, currentEntry, searchValue, advanceSearchValue)
-  }, [currentPage, currentEntry, searchValue])
+    // if (searchValue) {
+    const delay = 1000
+    const request = setTimeout(() => {
+      getData({ currentPage, currentEntry, advanceSearchValue, searchValue })
+    }, delay)
 
-  // useEffect(() => {
+    return () => {
+      clearTimeout(request)
+    }
+    // }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+  }, [currentPage, currentEntry, advanceSearchValue, searchValue])
+
+  // useEffect(() => {                                                                                                                                                                                                                    
   //   getData({currentPage, currentEntry, advanceSearchValue, searchValue})
   // }, [])
 
@@ -188,14 +181,11 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
   }
 
   const handleRowSelected = useCallback(state => {
-    setSelectedRows(state.selectedRows.map((curElem) => curElem))
+    setSelectedRows(state.selectedRows.map((curElem) => curElem.customer_id))
   }, [])
 
   const handleAdvanceSearch = (e) => {
     setAdvanceSearchValue({ ...advanceSearchValue, [e.target.name]: e.target.value })
-    // setAdvanceValue({ ...advanceValue, [e.target.name]: e.target.value })
-
-    // console.log("ff", advanceSearchValue)
   }
 
   // console.log(advanceSearchValue, "advanceSearchValue")
@@ -204,19 +194,6 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
       {
         apiLoader ? <FrontBaseLoader /> : ''
       }
-      <style>
-        {`
-          .datatableView {
-            padding: 5px 13px;
-            cursor: pointer
-          }
-
-          .datatableView.active {
-            background: #464646;
-            color: #fff
-          }
-        `}
-      </style>
       <Row className='justify-content-end mx-0'>
         <Col className='d-flex align-items-center justify-content-start gap-1' md='4' sm='12'>
           <div className='d-flex justify-content-start align-items-center gap-2'>
@@ -232,34 +209,6 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
             </select>
 
           </div>
-
-          {
-            viewContent ? <>
-              <div className="d-flex justify-content-end">
-                <div className="d-flex align-items-center" style={{border: '1px solid #ccc'}}>
-                    <div className={`datatableView ${viewType === "table" ? "active" : ""}`} onClick={() => setViewType("table")}>
-                        <Table size={22} />
-                    </div>
-                    <div className={`datatableView ${viewType === "grid" ? "active" : ""}`} onClick={() => setViewType("grid")}>
-                        <Grid size={22} />
-                    </div>
-
-                </div>
-              </div>
-            </> : ''
-          }
-          {
-            deleteContent && selectedRows.length > 0 ? <>
-                {deleteContent}
-            </> : ''
-          }
-          {
-            isExport && data?.length > 0 ? (
-              <a onClick={() => setIsDownLoad(true)}>
-                <Share size={'20px'} />
-              </a>
-            ) : ''
-          }
           {
             viewAll ? <>
               <Link className='btn btn-primary-main' to={viewAll}>View All</Link>
@@ -272,18 +221,27 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
             </> : ''
           }
 
+          {
+            isExport && data?.length > 0 ? (
+              <a className='btn btn-primary d-flex justify-content-center align-items-center' style={{ gap: '8px' }} onClick={() => setIsDownLoad(true)}>
+                <Share size={'14px'} />
+                Export
+              </a>
+            ) : ''
+          }
+
         </Col>
         <Col className='d-flex align-items-center justify-content-center' md='4' sm='12'>
           <h4 className='m-0'>{tableName}</h4>
         </Col>
-        <Col className='d-flex align-items-center justify-content-end' style={{gap: '15px'}} md='4' sm='12'>
+        <Col className='d-flex align-items-center justify-content-end gap-1' md='4' sm='12'>
           {
             create ? <>
               <Link className='btn btn-primary-main' to={createLink}>{createText}</Link>
             </> : ''
           }
           <Input
-            className='dataTable-filter form-control'
+            className='dataTable-filter form-control ms-1'
             style={{ width: `180px`, height: `2.714rem` }}
             type='text'
             bsSize='sm'
@@ -310,33 +268,14 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
         isadvance ? (
           <>
             <Row className='mt-1'>
-              <AdvanceOptions dataToSearch={tableCol.filter((curElem) => curElem?.isEnable)} advanceSearchValue={advanceSearchValue} updateData={handleAdvanceSearch} />
-            </Row>
-            <Row>
-              <Col md="12">
-                <div className='d-flex justify-content-end align-items-center'>
-                  <a className='btn btn-primary-main me-1' onClick={() => {
-
-                    const advanceObject = Object.fromEntries(
-                      Object.entries(advanceSearchValue).map(([key]) => [key, ""])
-                    )
-                    setAdvanceSearchValue(advanceObject)
-                    getData(currentPage, currentEntry, searchValue)
-                  }}>
-                    Clear Filter
-                  </a>
-                  <a className='btn btn-primary-main' onClick={() => getData(currentPage, currentEntry, searchValue, advanceSearchValue)}>
-                    Search
-                  </a>
-                </div>
-              </Col>
+              <AdvanceOptions dataToSearch={tableCol} updateData={handleAdvanceSearch} />
             </Row>
           </>
         ) : ''
       }
 
       <div className='react-dataTable' style={{ marginTop: '20px' }}>
-        {viewType === "table" ? <DataTable
+        {<DataTable
           key={currentEntry}
           pagination
           customStyles={!isStyling ? customStyles : {}}
@@ -351,13 +290,7 @@ const AdvanceServerSide = ({ tableName, tableCol, data, isLoading, count, isExpa
           progressComponent={<Spinner size="40px" />}
           selectableRows={selectableRows}
           onSelectedRowsChange={handleRowSelected}
-          expandableRows={isExpand}
-          expandOnRowClicked={isExpand}
-          expandableRowsComponent={ExpandableTable}
-        /> : <>
-          {viewContent}
-          <CustomPagination />
-        </>}
+        />}
 
       </div>
 

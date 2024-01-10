@@ -59,7 +59,7 @@ export const InfinitiNavigation = [
         id: 'insurance',
         title: 'Insurance',
         icon: <img style={{ marginRight: '18px' }} src={`${ownUrl}/images/website-slide/navbar/customer_group.png`} width='16px' />,
-        navLink: '/merchant/customer/all_cust_dashboard/add_insurance/'
+        navLink: '/merchant/customers/insurance'
       }
       // {
       //   id: 'customer_groups',

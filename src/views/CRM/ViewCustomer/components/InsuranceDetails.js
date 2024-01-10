@@ -15,24 +15,20 @@ const InsuranceDetails = () => {
     let serialNumber = 1
 
 
-    const getData = ({ advanceSearchValue, currentPage, currentEntry }) => {
+    const getData = () => {
         setIsLoading(true)
         const form_data = new FormData()
         const url = new URL(`${baseURL}/customers/merchant/get_view_customer/`)
-        Object.entries(advanceSearchValue).map(([key, value]) => value && form_data.append(key, value))
-        form_data.append("id", id)
-        form_data.append("edit_type", "is_insurance")
-        form_data.append("page", (currentPage * currentEntry))
-        form_data.append("size", currentEntry)
-        form_data.append("start", (currentPage * currentEntry))
+        form_data.append("customer_id", id)
+        form_data.append("tab_type", "insurance")
         fetch(url, {
             method: "POST",
             body: form_data
         })
             .then((res) => res.json())
             .then((res) => {
-                console.log(res.success[0])
-                setTableData(res.success.insurance_obj)
+                console.log(res.success[0], "ll")
+                setTableData(res.success)
                 setIsLoading(false)
             })
             .catch((error) => {
@@ -53,7 +49,7 @@ const InsuranceDetails = () => {
             name: "CUSTOMER NAME",
             minWidth: "240px",
             selector: (row) => (
-                row?.insurance_customer_name ? row.insurance_customer_name : 'None'
+                row?.customer_name !== undefined && row?.customer_name !== null ? row.customer_name : "None"
             ),
             type: 'text'
         },
@@ -61,7 +57,7 @@ const InsuranceDetails = () => {
             name: <>BRAND</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.insurance_brand ? row.insurance_brand : 'None'
+                row?.brand !== undefined && row?.brand !== null ? row.brand : "None"
             ),
             type: 'text'
         },
@@ -69,7 +65,7 @@ const InsuranceDetails = () => {
             name: "MODEL",
             minWidth: "100px",
             selector: (row) => (
-                row?.insurance_car_model ? row.insurance_car_model : 'None'
+                row?.car_model !== undefined && row?.car_model !== null ? row.car_model : "None"
             ),
             type: 'text'
         },
@@ -77,7 +73,7 @@ const InsuranceDetails = () => {
             name: "VARIANT",
             minWidth: "100px",
             selector: (row) => (
-                row?.insurance_variant ? row.insurance_variant : 'None'
+                row?.variant !== undefined && row?.variant !== null ? row.variant : "None"
             ),
             type: 'text'
         },
@@ -85,7 +81,7 @@ const InsuranceDetails = () => {
             name: <>POLICY NUMBER</>,
             minWidth: "100px",
             selector: (row) => (
-                row?.insurance_policy_number ? row.insurance_policy_number : "None"
+                row?.policy_number !== undefined && row?.policy_number !== null ? row.policy_number : "None"
             ),
             type: 'text'
         },
@@ -93,7 +89,7 @@ const InsuranceDetails = () => {
             name: <>INSURANCE COMPANY</>,
             minWidth: "120px",
             selector: (row) => (
-                row?.insurance_insurance_company ? row.insurance_insurance_company : 'None'
+                row?.insurance_company !== undefined && row?.insurance_company !== null ? row.insurance_company : "None"
             ),
             type: 'text'
         },
@@ -101,7 +97,7 @@ const InsuranceDetails = () => {
             name: <>POLICY PURCHASE DATE</>,
             minWidth: "150px",
             selector: (row) => (
-                row?.insurance_policy_purchase_date ? moment(row.insurance_policy_purchase_date).format("YYYY-MM-DD") : 'None'
+                row?.policy_purchase_date !== undefined && row?.policy_purchase_date !== null ? moment(row.policy_purchase_date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'text'
         },
@@ -109,7 +105,7 @@ const InsuranceDetails = () => {
             name: <>POLICY EXPIRY DATE </>,
             minWidth: "150px",
             selector: (row) => (
-                row?.insurance_policy_expiry_date ? moment(row.insurance_policy_expiry_date).format("YYYY-MM-DD") : 'None'
+                row?.policy_expiry_date !== undefined && row?.policy_expiry_date !== null ? moment(row.policy_expiry_date).format("YYYY-MM-DD") : 'None'
             ),
             type: 'text'
         },
@@ -117,7 +113,8 @@ const InsuranceDetails = () => {
             name: "AMOUNT",
             minWidth: "100px",
             selector: (row) => (
-                row?.finance_Emi_Start_Date ? row.finance_Emi_Start_Date : "None"),
+                row?.amount !== undefined && row?.amount !== null ? row.amount : "None"
+            ),
             type: 'text'
         }
 
@@ -139,7 +136,7 @@ const InsuranceDetails = () => {
                                 selectableRows={true}
                                 setSelectedRows={setSelected}
                                 selectedRows={selected}
-                                advanceFilter={true}
+                                advanceFilter={false}
                                 create={true}
                                 createLink={"/"}
                                 createText={"Add Insurance"}
