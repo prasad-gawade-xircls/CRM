@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import ThankYouPage from '@src/views/CRM/Customers/ThankYouPage'
+import AddVehicle from '../../views/CRM/Vehicle/AddVehicle'
 const ViewCustomer = lazy(() => import('../../views/CRM/ViewCustomer/ViewCustomer'))
 const AddBusiness = lazy(() => import('@src/views/CRM/Business/AddBusiness'))
 const CustomerType = lazy(() => import('@src/views/CRM/Customers/CustomerType'))
@@ -94,6 +95,10 @@ const Customers_Routes = [
   {
     path: '/merchant/customers/add-insurance/',
     element: <AddInsurance />
+  },
+  {
+    path: '/merchant/customers/add-vehicle/',
+    element: <AddVehicle />
   },
   // --------------------------------
   {

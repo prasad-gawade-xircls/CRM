@@ -58,11 +58,6 @@ const AddInsurance = () => {
     const navigate = useNavigate()
     const { id } = useParams()
 
-    
-    // console.log(formData)
-    // console.log(customerFormData)
-    // console.log(productFormData)
-
     const handleInputChange = (e, type) => {
         console.log(e)
         if (type === undefined) {
@@ -118,13 +113,6 @@ const AddInsurance = () => {
         }
     }
 
-    // insurance_code
-    // :
-    // 11445
-    // is_edit_url
-    // :
-    // "/customers/merchant/get_add_insurance/"
-
     const fetchInsuranceData = (id) => {
         const url = new URL(`${baseURL}/customers/merchant/get_view_customer/`)
         const form_data = new FormData()
@@ -160,7 +148,7 @@ const AddInsurance = () => {
                 toast.error('Failed to fetch Servicing Detail')
             })
     }
-    
+
     const postData = (btn) => {
         console.log(formData)
         const url = new URL(`${baseURL}/customers/merchant/get_add_insurance/`)
@@ -188,7 +176,7 @@ const AddInsurance = () => {
             })
             .then((resp) => {
                 console.log("Response:", resp)
-                    toast.success('Insurance saved successfully')
+                toast.success('Insurance saved successfully')
                 resp.is_edit_url ? navigate(`merchant/customers/insurance/edit_insurance/${resp.insurance_code}`) : navigate(`/merchant/customers/insurance/`)
                 fetchInsuranceData(resp.insurance_code)
             })
@@ -242,6 +230,37 @@ const AddInsurance = () => {
                 } else {
                     toast.error('Failed to save customer')
                 }
+            })
+    }
+
+    const postVehicleDetails = () => {
+        const url = new URL(`${baseURL}/customers/merchant/add_vehicle_details/`)
+        const form_data = new FormData()
+        Object.entries(productFormData).map(([key, value]) => {
+            form_data.append(key, value)
+        })
+        form_data.append("press_btn", 'SAVE')
+
+        fetch(url, {
+            method: "POST",
+            body: form_data
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    if (response.status === 409) {
+                        throw new Error('Vehicle  already exists')
+                    }
+                }
+                return response.json()
+            })
+            .then((resp) => {
+                console.log("Response:", resp)
+                toast.success('Vehicle saved successfully')
+                handleClose('product')
+            })
+            .catch((error) => {
+                console.error("Error:", error)
+                    toast.error('Failed to save Vehicle')
             })
     }
 
@@ -363,6 +382,7 @@ const AddInsurance = () => {
             .then((response) => {
                 const successData = response.data.car_brand
                 const brandOptions = successData
+                    .filter((item) => item[0] !== "")
                     .map((item) => ({
                         value: item[0],
                         label: item[0]
@@ -474,6 +494,7 @@ const AddInsurance = () => {
         //   return newErrors
         // })
     }
+
     const handleCustomerSubmitSection = (event) => {
         event.preventDefault()
         postNewCustomerData()
@@ -497,8 +518,11 @@ const AddInsurance = () => {
     ]
 
     const vehicleTypeOptions = [
-        { value: 'newCar', label: 'New Car' },
-        { value: 'used', label: 'Used' },
+        { value: 'new', label: 'New Car' },
+        { value: 'used', label: 'Used Car' }
+        // { value: 'renewal', label: 'Renewal' },
+        // { value: 'rollover', label: 'Rollover' },
+        // { value: 'data', label: 'Data' },
     ]
 
     const InnerStyles = (
@@ -753,7 +777,7 @@ const AddInsurance = () => {
                     <label htmlFor="vehicle-delivery-date">
                         Vehicle Delivery Date
                     </label>
-                    <input placeholder="Vehicle Delivery Date" type='text' id='vehicle-delivery-date' name='product.delivery_date' className="form-control"
+                    <input placeholder="Vehicle Delivery Date" type='date' id='vehicle-delivery-date' name='product.delivery_date' className="form-control"
                         value={productFormData.delivery_date}
                         onChange={handleInputChange}
                     />
@@ -762,14 +786,14 @@ const AddInsurance = () => {
                     <label htmlFor="vehicle-registration-date">
                         Vehicle Registration Date
                     </label>
-                    <input placeholder="Vehicle Registration Date" type='text' id='vehicle-registration-date' name='product.registeration_date' className="form-control"
+                    <input placeholder="Vehicle Registration Date" type='date' id='vehicle-registration-date' name='product.registeration_date' className="form-control"
                         value={productFormData?.registeration_date}
                         onChange={handleInputChange}
                     />
                 </Col>
                 <div className='d-flex justify-content-end mt-2'>
                     <div>
-                        <button className="btn btn-primary ms-2" type="button">Add Product</button>
+                        <button className="btn btn-primary ms-2" type="button" onClick={postVehicleDetails}>Add Product</button>
                     </div>
                 </div>
             </Row>
@@ -806,9 +830,9 @@ const AddInsurance = () => {
                 <Card>
                     <CardBody>
                         <form >
-                            <Container fluid className="px-0 py-1">
+                            <Container fluid className="px-0 pb-1">
                                 <Row>
-                                    <Col md={12} className="mt-2">
+                                    <Col md={12} className="">
                                         <h4 className="mb-0">Applicant Details</h4>
                                     </Col>
                                     <Col md={6} className="mt-2" style={{ zIndex: '9' }}>
