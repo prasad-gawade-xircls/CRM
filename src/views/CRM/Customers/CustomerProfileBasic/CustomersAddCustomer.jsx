@@ -8,6 +8,7 @@ const CustomersAddCustomer = ({ allData }) => {
       id,
       formData,
       handleInputChange,
+      handleEmailBlur,
       // handleNext,
       errors
    } = allData
@@ -92,42 +93,36 @@ const CustomersAddCustomer = ({ allData }) => {
                      value={titleOptions.find(option => option.value === formData.title) ?? ''}
                      onChange={(e) => handleInputChange(e, 'title')}
                   />
+                  <p id="title_val" className="text-danger m-0 p-0 vaildMessage"></p>
                </Col>
                <Col md={6} lg={4} className="mt-1">
                   <label htmlFor="basicDetails-first-name ">
                      First Name
                   </label>
                   <input placeholder="First Name" type='text' id='basicDetails-first-name' name='cust_first_name' className="form-control " value={formData?.cust_first_name ?? ''} onChange={handleInputChange} />
+                  <p id="cust_first_name_val" className="text-danger m-0 p-0 vaildMessage"></p>
                </Col>
                <Col md={6} lg={4} className="mt-1">
                   <label htmlFor="basicDetails-last-name">
                      Last Name
                   </label>
-                  <div className=''>
-                     <input placeholder="Last Name" type='text' id='basicDetails-last-name' name='cust_last_name' className="form-control" value={formData?.cust_last_name ?? ''} onChange={handleInputChange} />
-                  </div>
+                  <input placeholder="Last Name" type='text' id='basicDetails-last-name' name='cust_last_name' className="form-control" value={formData?.cust_last_name ?? ''} onChange={handleInputChange} />
+                  <p id="cust_last_name_val" className="text-danger m-0 p-0 vaildMessage"></p>
                </Col>
                <Col md={6} lg={4} className="mt-1">
                   <label htmlFor="basicDetails-email">
                      Email
                   </label>
-                  <div >
-                     <input placeholder="Email" type='email' id='basicDetails-email' name='email' className="form-control" value={formData?.email ?? ''} onChange={handleInputChange} disabled={id} />
-                     <p className={`text-danger text-left m-0 font-small-1 ${errors.email ? '' : 'd-none'}`}>
-                        This field is required
-                     </p>
-                  </div>
+                  <input onBlur={handleEmailBlur} placeholder="Email" type='email' id='basicDetails-email' name='email' className="form-control" value={formData?.email ?? ''} onChange={handleInputChange} disabled={id} />
+                  <p id="email_val" className="text-danger m-0 p-0 vaildMessage"></p>
+                  <p id="email_val1" className="text-danger m-0 p-0 vaildMessage"></p>
                </Col>
                <Col md={6} lg={4} className="mt-1">
                   <label htmlFor="basicDetails-mobile">
                      Mobile Number
                   </label>
-                  <div>
-                     <input placeholder="Mobile Number" type='tel' maxLength={10} id='basicDetails-mobile' name='phone_no' className="form-control" value={formData?.phone_no ?? ''} onChange={handleInputChange} disabled={id} />
-                     <p className={`text-danger text-left m-0 font-small-1 ${errors.phone_no ? '' : 'd-none'}`}>
-                        {errors.phone_no}
-                     </p>
-                  </div>
+                  <input placeholder="Mobile Number" type='tel' maxLength={10} id='basicDetails-mobile' name='phone_no' className="form-control" value={formData?.phone_no ?? ''} onChange={handleInputChange} disabled={id} />
+                  <p id="phone_no_val" className="text-danger m-0 p-0 vaildMessage"></p>
                </Col>
                <Col md={6} lg={4} className="mt-1">
                   <label htmlFor="basicDetails-alt-mobile">

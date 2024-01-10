@@ -218,7 +218,12 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
   }
 
   const relationOptions = [
-    { value: 'business', label: 'Business' }
+    { value: 'Business', label: 'Client' },
+    { value: 'Retail', label: 'Retail' },
+    { value: 'Dealer', label: 'Dealer' },
+    { value: 'Distributor', label: 'Distributor' },
+    { value: 'Manufacturer', label: 'Manufacturer' },
+    { value: 'Vendor', label: 'Vendor' },
   ]
 
   const InnerStyles = (

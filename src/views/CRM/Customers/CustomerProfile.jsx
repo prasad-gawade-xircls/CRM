@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Card, CardBody } from "reactstrap"
-import { baseURL } from "../../../assets/auth/jwtService.js"
+import { baseURL } from "@src/assets/auth/jwtService.js"
 import { useParams, useNavigate } from 'react-router-dom'
 import toast from "react-hot-toast"
 
@@ -13,6 +13,7 @@ import CustomerBasicAddress from "./CustomerProfileBasic/CustomerBasicAddress.js
 import CustomerBasicCompanyInfo from "./CustomerProfileBasic/CustomerBasicCompanyInfo.js"
 import CustomerBasicAccount from "./CustomerProfileBasic/CustomerBasicAccount.js"
 import CustomerBasicNav from "./CustomerProfileBasic/CustomerBasicNav.js"
+import { validForm, validateEmail } from "../../Validator/index.js"
 
 
 /* eslint-disable */
@@ -189,53 +190,73 @@ export default function CustomerProfile() {
       })
   }
 
-  const validateValues = (inputValues) => {
-    console.log('validation ran')
-    const errors = {}
-    if (!(inputValues.email) || inputValues.email.length < 1) {
-      errors.email = "please enter valid Email"
-    }
-    else if (inputValues) {
-      const inputValuesPhone = ['phone_no', 'phone_no2', 'landline1', 'landline2']
-      const RequiredInputValuesPhone = ['phone_no']
-      for (const key of inputValuesPhone) {
-        if (RequiredInputValuesPhone.includes(key)) {
-          if (!(inputValues[key])) {
-            errors[key] = "This field is Required"
-            break
-          }
-          else if (inputValues[key] && !(inputValues[key]?.length === 10)) {
-            errors[key] = "Invalid phone number"
-            break
-          }
-        }
-        break
-      }
-    }
-    console.log(errors)
-    return errors
-  }
+  const valueToCheck = [
+    {
+      name: 'title',
+      message: 'Please enter your Title',
+      type: 'string',
+      id: 'title'
+    },
+    {
+      name: 'cust_first_name',
+      message: 'Please enter your first name',
+      type: 'string',
+      id: 'cust_first_name'
+    },
+    {
+      name: 'cust_last_name',
+      message: 'Please enter your last name',
+      type: 'string',
+      id: 'cust_last_name'
+    },
+    {
+      name: 'email',
+      message: 'Please enter your email ID',
+      type: 'string',
+      id: 'email'
+    },
+    {
+      name: 'phone_no',
+      message: 'Please enter your phone number',
+      type: 'string',
+      id: 'phone_no'
+    },
+  ]
 
   const handleSubmitSection = (event, btn) => {
     event.preventDefault()
-    setErrors(previousErrors => {
-      const newErrors = validateValues(formData)
-      if (Object.keys(newErrors).length === 0) {
+    checkForm = validForm(valueToCheck, formData)
+    if (checkForm) {
+      const emailCheck = validateEmail(formData.email)
+      if (!emailCheck) {
+        // document.getElementById('email_val').innerHTML = 'Invaild email ID'
+        toast.error("Invaild email ID")
+      } else {
         postData(btn)
       }
-      return newErrors
-    })
+    }
   }
 
-  const handleNext = () => {
-    setErrors(previousErrors => {
-      const newErrors = validateValues(formData)
-      if (Object.keys(newErrors).length === 0) {
+  let checkForm = true
+  const handleNext = async () => {
+    checkForm = validForm(valueToCheck, formData)
+    if (checkForm) {
+      const emailCheck = validateEmail(formData.email)
+      if (!emailCheck) {
+        // document.getElementById('email_val').innerHTML = 'Invaild email ID'
+        toast.error("Invaild email ID")
+      } else {
         setCurrentStep(prevStep => prevStep + 1)
-        console.log('handleNext', currentStep)
       }
-      return newErrors
-    })
+    }
+  }
+
+  const handleEmailBlur = () => {
+    const emailCheck = validateEmail(formData.email)
+    if (!emailCheck) {
+      // document.getElementById('email_val').innerHTML = 'Invaild email ID'
+      toast.error("Invaild email ID")
+    }
   }
 
   const handleBack = () => {
@@ -243,13 +264,16 @@ export default function CustomerProfile() {
   }
 
   const NavCurrentStep = (step) => {
-    setErrors(previousErrors => {
-      const newErrors = validateValues(formData)
-      if (Object.keys(newErrors).length === 0) {
+    checkForm = validForm(valueToCheck, formData)
+    if (checkForm) {
+      const emailCheck = validateEmail(formData.email)
+      if (!emailCheck) {
+        // document.getElementById('email_val').innerHTML = 'Invaild email ID'
+        toast.error("Invaild email ID")
+      } else {
         setCurrentStep(step)
       }
-      return newErrors
-    })
+    }
   }
 
   const allData = {
@@ -257,6 +281,7 @@ export default function CustomerProfile() {
     currentStep,
     errors,
     id,
+    handleEmailBlur,
     handleInputChange,
     handleNext,
     handleBack
