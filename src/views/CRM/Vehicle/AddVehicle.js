@@ -387,7 +387,8 @@ const AddVehicle = () => {
                   </form>
                </CardBody>
             </Card>
-         </div></>
+         </div>
+      </>
    )
 }
 

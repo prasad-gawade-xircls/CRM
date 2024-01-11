@@ -1,24 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { Card, CardBody } from "reactstrap"
-import ApplicantForm from './ApplicantForm'
-import AddFinanceNav from './AddFinanceNav'
-import CoApplicantForm from './CoApplicantForm'
-import EMIForm from './EMIForm'
-import ReferralForm from './ReferralForm'
+import ApplicantForm from './Components/ApplicantForm'
+import AddFinanceNav from './Components/AddFinanceNav'
+import CoApplicantForm from './Components/CoApplicantForm'
+import EMIForm from './Components/EMIForm'
+import ReferralForm from './Components/ReferralForm'
 import { baseURL } from '@src/assets/auth/jwtService.js'
 import toast from "react-hot-toast"
-import financeData from './financeData'
+// import financeData from './financeData'
 import { useParams, useNavigate } from 'react-router-dom'
 
 const AddFinance = () => {
   const [currentStep, setCurrentStep] = useState(1)
-  const [formData, setFormData] = useState(financeData)
+  const [formData, setFormData] = useState({})
 
   // console.log(formData, 'formData')
 
   const navigate = useNavigate()
   const { id } = useParams()
 
+  const formatDate = (inputDate) => {
+    const parts = inputDate.split('-')
+    if (parts.length === 3 && parts[0].length === 2 && parts[1].length === 2 && parts[2].length === 4) {
+      const parsedDate = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`)
+      const formattedDate = parsedDate.toISOString().split('T')[0]
+      return formattedDate
+    }
+    return inputDate
+  }
+  
   const handleInputChange = (e, type) => {
     if (type === undefined) {
       const { name, value } = e.target
@@ -66,7 +76,8 @@ const AddFinance = () => {
         setFormData(newObject)
         setFormData(prefData => ({
             ...prefData,
-            policy_expiry_date: prefData?.policy_expiry_date ? prefData?.policy_expiry_date.substring(0, 10) : ''
+          Loan_Disbursement_Date: prefData?.Loan_Disbursement_Date ? formatDate(prefData?.Loan_Disbursement_Date.substring(0, 10)) : '',
+          policy_expiry_date: prefData?.policy_expiry_date ? formatDate(prefData?.policy_expiry_date.substring(0, 10)) : ''
         }))
       })
       .catch((error) => {
@@ -144,6 +155,7 @@ const AddFinance = () => {
   const formHandler = {
     currentStep,
     formData,
+    id,
     handleInputChange,
     handleNext,
     handleBack

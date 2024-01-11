@@ -1,7 +1,9 @@
 import { lazy } from 'react'
 import ThankYouPage from '@src/views/CRM/Customers/ThankYouPage'
-import AddVehicle from '../../views/CRM/Vehicle/AddVehicle'
-const ViewCustomer = lazy(() => import('../../views/CRM/ViewCustomer/ViewCustomer'))
+import ViewFinance from '../../views/CRM/Finance/ViewFinance'
+const AddVehicle = lazy(() => import('@src/views/CRM/Vehicle/AddVehicle'))
+const AddCall = lazy(() => import('@src/views/CRM/Call/AddCall'))
+const ViewCustomer = lazy(() => import('@src/views/CRM/ViewCustomer/ViewCustomer'))
 const AddBusiness = lazy(() => import('@src/views/CRM/Business/AddBusiness'))
 const CustomerType = lazy(() => import('@src/views/CRM/Customers/CustomerType'))
 const AddInsurance = lazy(() => import('@src/views/CRM/Insurance/AddInsurance'))
@@ -29,10 +31,10 @@ const CustomerBasicCompanyInfo = lazy(() => import('@src/views/CRM/Customers/Cus
 const CustomerBasicIdProof = lazy(() => import('@src/views/CRM/Customers/CustomerProfileBasic/CustomerBasicIdProof'))
 const CustomerBasicPersonal = lazy(() => import('@src/views/CRM/Customers/CustomerProfileBasic/CustomerBasicPersonal'))
 const AddCustomerForm = lazy(() => import('@src/views/CRM/Customers/AddCustomerForm'))
-const Finance = lazy(() => import('../../views/Leads/Finance'))
-const Service = lazy(() => import('../../views/Leads/Service'))
-// const Customer = lazy(() => import('../../views/Leads/Customers'))
-const Insurance = lazy(() => import('../../views/Leads/Insurance'))
+const Finance = lazy(() => import('@src/views/Leads/Finance'))
+const Service = lazy(() => import('@src/views/Leads/Service'))
+// const Customer = lazy(() => import('@src/views/Leads/Customers'))
+const Insurance = lazy(() => import('@src/views/Leads/Insurance'))
 
 
 const Customers_Routes = [
@@ -73,6 +75,10 @@ const Customers_Routes = [
     element: <AddFinance/>
   },
   {
+    path: '/merchant/customers/view_finance/:id',
+    element: <ViewFinance/>
+  },
+  {
     path: '/merchant/customer/all_cust_dashboard/add_servicing/',
     element: <Servicing />
   },
@@ -107,6 +113,10 @@ const Customers_Routes = [
   {
     path: '/merchant/customers/view-vehicle/:id',
     element: <AddVehicle />
+  },
+  {
+    path: '/merchant/customers/add-call',
+    element: <AddCall />
   },
   // --------------------------------
   {

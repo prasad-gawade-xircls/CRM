@@ -24,7 +24,7 @@ const ApplicantForm = ({ formHandler }) => {
     // console.log('productOptions')
     // console.log(productOptions)
 
-    const { handleNext, formData, handleInputChange } = formHandler
+    const { id, handleNext, formData, handleInputChange } = formHandler
 
     const fetchCustomerData = async () => {
         try {
@@ -175,7 +175,7 @@ const ApplicantForm = ({ formHandler }) => {
     )
 
     const clientTypeOptions = [
-        { value: 'jmd', label: 'JMD' },
+        { value: 'JMD', label: 'JMD' },
         { value: 'nonjmd', label: 'Non-JMD' }
     ]
 
@@ -514,9 +514,18 @@ const ApplicantForm = ({ formHandler }) => {
                             defaultOptions
                             cacheOptions
                             id="customer-name"
-                            loadOptions={loadOptions}
+                            loadOptions={(inputValue, callback) => {
+                                if (!id) {
+                                    loadOptions(inputValue, callback)
+                                } else {
+                                    return callback([])
+                                }
+                            }
+                            }
                             onChange={selectCustomer}
                             components={{ Menu: CustomSelectComponent }}
+                            value={{ value: formData?.customer_name, label: formData?.customer_name }}
+                            isDisabled={id}
                         //   value={selectedOption}
                         />
                     </Col>
@@ -529,6 +538,8 @@ const ApplicantForm = ({ formHandler }) => {
                             id="basicDetails-client-type"
                             options={clientTypeOptions}
                             value={clientTypeOptions?.find(option => option.value === formData?.client)}
+                            // value={{ value: formData?.client, label: formData?.client }}
+                            isDisabled={id}
                             onChange={e => handleInputChange(e, 'client')}
                             closeMenuOnSelect={true}
                         />
@@ -617,7 +628,6 @@ const ApplicantForm = ({ formHandler }) => {
                     <Col md={6} className="mt-2">
                         <label htmlFor="loan-disbursement">Loan Disbursement Date</label>
                         <input
-
                             placeholder="Loan Disbursement Date"
                             type="date"
                             id="personalDetails-dob"
