@@ -13,6 +13,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 const AddFinance = () => {
   const [currentStep, setCurrentStep] = useState(1)
   const [formData, setFormData] = useState({})
+  const [addWithCustId, setAddWithCustId] = useState(false)
 
   // console.log(formData, 'formData')
 
@@ -28,7 +29,7 @@ const AddFinance = () => {
     }
     return inputDate
   }
-  
+
   const handleInputChange = (e, type) => {
     if (type === undefined) {
       const { name, value } = e.target
@@ -65,20 +66,20 @@ const AddFinance = () => {
         return response.json()
       })
       .then((resp) => {
-        // console.log("ResponseId:", resp.success[0])
-        const newObject = {}
-        for (const key in resp.success[0]) {
-          if (resp.success[0].hasOwnProperty(key) && resp.success[0][key] !== null) {
-            newObject[key] = resp.success[0][key]
+        if (!addWithCustId) {
+          const newObject = {}
+          for (const key in resp.success[0]) {
+            if (resp.success[0].hasOwnProperty(key) && resp.success[0][key] !== null) {
+              newObject[key] = resp.success[0][key]
+            }
           }
-        }
-        // console.log('AfterRemovingNullId', newObject)
-        setFormData(newObject)
-        setFormData(prefData => ({
+          setFormData(newObject)
+          setFormData(prefData => ({
             ...prefData,
-          Loan_Disbursement_Date: prefData?.Loan_Disbursement_Date ? formatDate(prefData?.Loan_Disbursement_Date.substring(0, 10)) : '',
-          policy_expiry_date: prefData?.policy_expiry_date ? formatDate(prefData?.policy_expiry_date.substring(0, 10)) : ''
-        }))
+            Loan_Disbursement_Date: prefData?.Loan_Disbursement_Date ? formatDate(prefData?.Loan_Disbursement_Date.substring(0, 10)) : '',
+            policy_expiry_date: prefData?.policy_expiry_date ? formatDate(prefData?.policy_expiry_date.substring(0, 10)) : ''
+          }))
+        }
       })
       .catch((error) => {
         console.error("Error:", error)
@@ -122,7 +123,11 @@ const AddFinance = () => {
   }
 
   useEffect(() => {
-    if (id) {
+    if (location.pathname.startsWith('/merchant/customers/add-vehicle/')) {
+      console.log('This is the add vehicle page')
+      fetchFinanceData(id)
+      setAddWithCustId(true)
+    } else if (id) {
       fetchFinanceData(id)
     }
   }, [])

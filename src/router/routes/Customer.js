@@ -71,6 +71,10 @@ const Customers_Routes = [
     element: <AddFinance />
   },
   {
+    path: '/merchant/customers/add-vehicle/:id',
+    element: <AddFinance />
+  },
+  {
     path: '/merchant/customers/edit_finance/:id',
     element: <AddFinance/>
   },

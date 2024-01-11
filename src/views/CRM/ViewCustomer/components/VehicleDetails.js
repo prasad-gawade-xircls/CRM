@@ -3,11 +3,11 @@ import { Card, CardBody, Col, Row } from 'reactstrap'
 import AdvanceServerSide from "@src/views/Components/DataTable/AdvanceServerSide.js"
 // import axios from 'axios'
 import { baseURL } from '../../../../assets/auth/jwtService'
-import { useParams } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { Edit, Eye } from 'react-feather'
 
 const VehicleDetails = () => {
-
+    const navigate = useNavigate()
     const { id } = useParams()
     const [tableData, setTableData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
@@ -75,11 +75,11 @@ const VehicleDetails = () => {
         {
             name: "ACTION",
             minWidth: "50px",
-            selector: () => (
+            selector: (row) => (
                 <>
                     <div className='d-flex justify-content-center align-items-center gap-2'>
-                        <Eye size='17px' style={{cursor: "pointer"}} />
-                        <Edit size='17px' style={{cursor: "pointer"}}/>
+                        <Eye  size='17px' style={{ cursor: "pointer" }} color='green' onClick={() => navigate(`/merchant/customers/edit-vehicle/${row?.id}`)}/>
+                        <Edit  size='17px' style={{ cursor: "pointer" }} color='green' onClick={() => navigate(`/merchant/customers/edit-vehicle/${row?.id}`)}/>
                     </div>
                 </>
             ),
@@ -108,7 +108,7 @@ const VehicleDetails = () => {
                                 selectedRows={selected}
                                 advanceFilter={false}
                                 create={true}
-                                createLink={"/"}
+                                createLink={`/merchant/customers/add-vehicle/${id}`}
                                 createText={"Add Vehicle"}
                             />
                         </CardBody>

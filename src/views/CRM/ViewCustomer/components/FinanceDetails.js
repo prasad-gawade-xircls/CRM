@@ -133,6 +133,7 @@ const FinanceDetails = () => {
                 <>
                     <div className='d-flex justify-content-center align-items-center gap-1'>
                         <Eye size='15px' />
+                        {/* <Edit  size='15px' style={{ cursor: "pointer" }} color='green' onClick={() => navigate(`/merchant/customers/edit-vehicle/${row?.id}`)}/> */}
                         <Edit size='15px' />
                     </div>
                 </>
@@ -159,7 +160,7 @@ const FinanceDetails = () => {
                                 selectedRows={selected}
                                 advanceFilter={false}
                                 create={true}
-                                createLink={"/"}
+                                createLink={`/merchant/customers/add-vehicle/${id}`}
                                 createText={"Add Finance"}
                             />
                         </CardBody>
