@@ -97,7 +97,15 @@ const Customers_Routes = [
     element: <AddInsurance />
   },
   {
-    path: '/merchant/customers/add-vehicle/',
+    path: '/merchant/customers/add-vehicle/:id',
+    element: <AddVehicle />
+  },
+  {
+    path: '/merchant/customers/edit-vehicle/:id',
+    element: <AddVehicle />
+  },
+  {
+    path: '/merchant/customers/view-vehicle/:id',
     element: <AddVehicle />
   },
   // --------------------------------

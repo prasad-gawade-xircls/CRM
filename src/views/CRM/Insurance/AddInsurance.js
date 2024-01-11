@@ -260,7 +260,7 @@ const AddInsurance = () => {
             })
             .catch((error) => {
                 console.error("Error:", error)
-                    toast.error('Failed to save Vehicle')
+                toast.error('Failed to save Vehicle')
             })
     }
 
@@ -743,7 +743,12 @@ const AddInsurance = () => {
                         cacheOptions
                         id="brand-select"
                         loadOptions={loadBrandOptions}
-                        onChange={(e) => selectChange(e, 'brand')}
+                        // onChange={(e) => selectChange(e, 'brand')}
+                        onChange={(e) => {
+                            setProductFormData(prev => ({ ...prev, car_model: '', variant: '' }))
+                            selectChange(e, 'brand')
+                            handleInputChange(e, 'product.brand')
+                        }}
                     //   value={selectedOption}
                     />
                 </Col>
@@ -757,7 +762,12 @@ const AddInsurance = () => {
                         id="model-select"
                         options={productModelOption}
                         closeMenuOnSelect={true}
-                        onChange={e => selectChange(e, 'model')}
+                        // onChange={e => selectChange(e, 'model')}
+                        onChange={e => {
+                            setProductFormData(prev => ({ ...prev, variant: '' }))
+                            selectChange(e, 'model')
+                            handleInputChange(e, 'product.car_model')
+                         }}
                     // isLoading={loading}
                     />
                 </Col>
