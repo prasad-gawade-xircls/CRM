@@ -93,8 +93,7 @@ const IdentityProof = ({ AllFormData }) => {
                 </Col>
 
                 {
-                  adharImageUrl
-                  && (
+                  adharImageUrl && (
                     <Col md='4' className='d-flex justify-content-center align-items-center mb-1'>
                       <div>
                         <img className='image_viewer' width="210px" height="110px" src={adharImageUrl} alt="Aadhar" />
@@ -146,8 +145,7 @@ const IdentityProof = ({ AllFormData }) => {
                 </Col>
 
                 {
-                  panImageUrl
-                  && (
+                  panImageUrl && (
                     <Col md='4' className='d-flex justify-content-center align-items-center mt-1 mb-1'>
                       <div>
                         <img className='image_viewer' width="210px" height="110px" src={panImageUrl} alt="Pan" />
