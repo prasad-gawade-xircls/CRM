@@ -15,7 +15,6 @@ const FinanceDetails = () => {
     const [selected, setSelected] = useState([])
     let serialNumber = 1
 
-
     const getData = () => {
         setIsLoading(true)
         const form_data = new FormData()
@@ -160,7 +159,7 @@ const FinanceDetails = () => {
                                 selectedRows={selected}
                                 advanceFilter={false}
                                 create={true}
-                                createLink={`/merchant/customers/add-vehicle/${id}`}
+                                createLink={`/merchant/customers/add-finance/${id}`}
                                 createText={"Add Finance"}
                             />
                         </CardBody>

@@ -6,7 +6,7 @@ import { baseURL } from '../../../../assets/auth/jwtService'
 import { useParams } from 'react-router-dom'
 import moment from 'moment'
 
-const InsuranceDetails = () => {
+const                               InsuranceDetails = () => {
 
     const { id } = useParams()
     const [tableData, setTableData] = useState([])
@@ -138,7 +138,7 @@ const InsuranceDetails = () => {
                                 selectedRows={selected}
                                 advanceFilter={false}
                                 create={true}
-                                createLink={"/merchant/customers/add-insurance/"}
+                                createLink={`/merchant/customers/add-insurance/${id}`}
                                 createText={"Add Insurance"}
                             />
                         </CardBody>

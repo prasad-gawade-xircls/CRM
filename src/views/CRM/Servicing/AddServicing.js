@@ -39,6 +39,9 @@ const AddServicing = () => {
     const navigate = useNavigate()
     const { id } = useParams()
 
+    let PageTitle = 'Add Servicng'
+    let AddWithId = false
+
     const fetchServiceData = (id) => {
         const url = new URL(`${baseURL}/customers/merchant/get_view_customer/`)
         const form_data = new FormData()
@@ -238,7 +241,14 @@ const AddServicing = () => {
     useEffect(() => {
         fetchCustomerData(currentPage, null, () => { })
         getCountries()
-        if (id) {
+        if (location.pathname.startsWith('/merchant/customers/edit_service/')) {
+            PageTitle = 'Edit Service'
+            fetchServiceData(id)
+        } else if (location.pathname.startsWith('/merchant/customers/add-servicing/:id')) {
+            PageTitle = 'Add Service'
+            AddWithId = true
+            fetchServiceData(id)
+        } else if (id) {
             fetchServiceData(id)
         }
     }, [])
@@ -324,6 +334,7 @@ const AddServicing = () => {
                         closeMenuOnSelect={true}
                         value={titleOptions.find(option => option.value === customerFormData.title) ?? ''}
                         onChange={(e) => setCustomerFormData(prevData => ({ ...prevData, title: e.value }))}
+                        isDisabled={AddWithId}
                     />
                 </Col>
                 <Col md={12} className="mt-2">
@@ -333,7 +344,7 @@ const AddServicing = () => {
                     <input placeholder="First Name" type='text' id='basicDetails-first-name' name='customer.cust_first_name' className="form-control"
                         value={customerFormData?.cust_first_name}
                         onChange={handleInputChange}
-
+                        disabled={AddWithId}
                     />
                 </Col>
                 <Col md={12} className="mt-2">

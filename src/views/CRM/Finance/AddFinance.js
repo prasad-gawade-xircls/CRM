@@ -20,6 +20,8 @@ const AddFinance = () => {
   const navigate = useNavigate()
   const { id } = useParams()
 
+  let PageTitle = 'Add Finance'
+  
   const formatDate = (inputDate) => {
     const parts = inputDate.split('-')
     if (parts.length === 3 && parts[0].length === 2 && parts[1].length === 2 && parts[2].length === 4) {
@@ -128,6 +130,7 @@ const AddFinance = () => {
       fetchFinanceData(id)
       setAddWithCustId(true)
     } else if (id) {
+      PageTitle = 'Edit Page'
       fetchFinanceData(id)
     }
   }, [])
@@ -171,7 +174,7 @@ const AddFinance = () => {
       <div className="customer-profile">
         <Card>
           <CardBody>
-            <h3 className="mb-0">{id ? 'Edit Finance' : 'Add Finance'}</h3>
+            <h3 className="mb-0">{PageTitle}</h3>
           </CardBody>
         </Card>
         <Card>

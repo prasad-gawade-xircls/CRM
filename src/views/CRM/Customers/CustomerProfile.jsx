@@ -51,8 +51,8 @@ export default function CustomerProfile() {
         }
         // console.log('AfterRemovingNull', newObject);
         setFormData(newObject)
-        const name = newObject.customer_name.split(' ')
-        const datePart = newObject.cust_dob.substring(0, 10)
+        const name = newObject?.customer_name.split(' ')
+        const datePart = newObject?.cust_dob ? newObject?.cust_dob.substring(0, 10) : ''
         setFormData(prefData => ({
           ...prefData,
           cust_first_name: name[0],

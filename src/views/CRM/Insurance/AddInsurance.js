@@ -58,6 +58,9 @@ const AddInsurance = () => {
     const navigate = useNavigate()
     const { id } = useParams()
 
+    let PageTitle = 'Add Insurance'
+    let AddWithId = false
+    
     const handleInputChange = (e, type) => {
         console.log(e)
         if (type === undefined) {
@@ -320,7 +323,14 @@ const AddInsurance = () => {
     useEffect(() => {
         getCountries()
         fetchCustomerData(currentPage, null, () => { })
-        if (id) {
+        if (location.pathname.startsWith('/merchant/customers/edit_insurance/')) {
+            PageTitle = 'Edit Insurance'
+            fetchInsuranceData(id)
+        }else if (location.pathname.startsWith('/merchant/customers/add-insurance/:id')) {
+            PageTitle = 'Add Insurance'
+            AddWithId = true
+            fetchInsuranceData(id)
+         } else if (id){
             fetchInsuranceData(id)
         }
     }, [])
@@ -834,7 +844,7 @@ const AddInsurance = () => {
             <div className="customer-profile">
                 <Card>
                     <CardBody>
-                        <h3 className="mb-0">{id ? 'Edit Insurance' : 'Add Insurance'}</h3>
+                        <h3 className="mb-0">{PageTitle}</h3>
                     </CardBody>
                 </Card>
                 <Card>
@@ -876,6 +886,7 @@ const AddInsurance = () => {
                                             onMenuScrollToBottom={() => fetchCustomerData(currentPage, null, () => { })}
                                             components={{ Menu: CustomSelectComponent }}
                                             onChange={selectCustomer}
+                                            isDisabled={AddWithId}
                                         />
                                     </Col>
                                     <Col md={6} className="mt-2">

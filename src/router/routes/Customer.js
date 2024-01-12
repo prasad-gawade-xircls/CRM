@@ -71,7 +71,7 @@ const Customers_Routes = [
     element: <AddFinance />
   },
   {
-    path: '/merchant/customers/add-vehicle/:id',
+    path: '/merchant/customers/add-finance/:id',
     element: <AddFinance />
   },
   {
@@ -91,6 +91,10 @@ const Customers_Routes = [
     element: <AddServicing />
   },
   {
+    path: '/merchant/customers/add-servicing/:id',
+    element: <AddServicing />
+  },
+  {
     path: '/merchant/customers/edit_service/:id',
     element: <AddServicing/>
   },
@@ -104,6 +108,10 @@ const Customers_Routes = [
   },
   {
     path: '/merchant/customers/add-insurance/',
+    element: <AddInsurance />
+  },
+  {
+    path: '/merchant/customers/add-insurance/:id',
     element: <AddInsurance />
   },
   {

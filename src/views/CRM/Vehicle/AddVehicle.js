@@ -20,9 +20,12 @@ const AddVehicle = () => {
    const [productModelOption, setProductModelOption] = useState([])
    const [productVariantOption, setProductVariantOption] = useState([])
    const [viewPage, setViewPage] = useState(false)
+   const [editPage, setEditPage] = useState(false)
 
    const { id } = useParams()
    const navigate = useNavigate()
+
+   let PageTitle = 'Add Vehicle'
 
    console.log(formData)
 
@@ -98,12 +101,12 @@ const AddVehicle = () => {
 
    useEffect(() => {
       if (location.pathname.startsWith('/merchant/customers/edit-vehicle/')) {
-         console.log('This is the edit vehicle page')
          getUser('edit')
+         PageTitle = 'Edit Vehicle'
       } else if (location.pathname.startsWith('/merchant/customers/view-vehicle/')) {
-         console.log('This is the view vehicle page')
          setViewPage(true)
          getUser('edit')
+         PageTitle = 'View Vehicle'
       } else {
          getUser()
       }
@@ -201,7 +204,7 @@ const AddVehicle = () => {
          <div className="customer-profile">
             <Card>
                <CardBody>
-                  <h3 className="mb-0">{id ? 'Edit Vehicle' : 'Add Vehilcle'}</h3>
+                  <h3 className="mb-0">{PageTitle}</h3>
                </CardBody>
             </Card>
             <Card>

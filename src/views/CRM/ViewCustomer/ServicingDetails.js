@@ -143,7 +143,7 @@ const ServicingDetails = () => {
                                 selectedRows={selected}
                                 advanceFilter={false}
                                 create={true}
-                                createLink={"/merchant/customers/add-servicing/"}
+                                createLink={`/merchant/customers/add-servicing/${id}`}
                                 createText={"Add Servicing"}
                             />
                         </CardBody>
