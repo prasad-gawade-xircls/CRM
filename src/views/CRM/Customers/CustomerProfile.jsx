@@ -161,10 +161,11 @@ export default function CustomerProfile() {
         if (!response.ok) {
           if (response.status === 409) {
             throw new Error('Customer already exists')
-          } else {
-            toast.error(`HTTP error! Status: ${response.status}`)
-            throw new Error(`HTTP error! Status: ${response.status}`)
-          }
+          } 
+          // else {
+          //   toast.error(`HTTP error! Status: ${response.status}`)
+          //   throw new Error(`HTTP error! Status: ${response.status}`)
+          // }
         }
         return response.json()
       })
