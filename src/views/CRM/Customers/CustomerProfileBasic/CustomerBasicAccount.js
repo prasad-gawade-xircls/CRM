@@ -23,7 +23,7 @@ const CustomerBasicAccount = ({ allData }) => {
             <div className="d-flex gap-1">
               <div style={{ width: "100px", height: "100px" }}>
                 <img className="img-thumbnail" style={{height:'100px'}}
-                  src={(formData?.view_logo_url) ? formData?.view_logo_url : formData?.user_profile_img ? `${baseURL}/static${formData?.user_profile_img}` : userprofile }
+                  src={(formData?.user_profile_img_view) ? formData?.user_profile_img_view : formData?.user_profile_img ? `${baseURL}/static${formData?.user_profile_img}` : userprofile }
                   alt="User Image"
                   loading="lazy"
                 />

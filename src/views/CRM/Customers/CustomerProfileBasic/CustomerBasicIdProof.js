@@ -1,6 +1,7 @@
 import React from "react"
 import { Container, Card, CardBody, Row, Col } from "reactstrap"
 // import "../CustomerProfile.css"
+import addDoc from '../Asset/addDoc.png'
 
 const CustomerBasicIdProof = ({ allData }) => {
   const {
@@ -14,11 +15,11 @@ const CustomerBasicIdProof = ({ allData }) => {
   return (
     <>
       <Container fluid className="px-0 py-1">
-        <Row>
+        <Row className="align-items-center">
           <Col md={12} className="mt-2">
             <h4 className="mb-0">Identity Proofs</h4>
           </Col>
-          <Col md={6} className="mt-2">
+          <Col md={5} className="mt-2">
             <label htmlFor="idproof-aadhar-no">Aadhar Number</label>
             <input
               placeholder="AadharNumber"
@@ -30,7 +31,7 @@ const CustomerBasicIdProof = ({ allData }) => {
               onChange={handleInputChange}
             />
           </Col>
-          <Col md={6} className="mt-2">
+          <Col md={5} className="mt-2">
             <label>Upload Aadhar Card Image</label>
             <div className="form-control p-0 d-flex justify-content-between align-items-center">
               <span className="mx-1">{formData?.aadhar_pdf_file?.name || formData?.aadhar_pdf_file || 'Aadhar Card'}</span>
@@ -50,7 +51,16 @@ const CustomerBasicIdProof = ({ allData }) => {
               </label>
             </div>
           </Col>
-          <Col md={6} className="mt-2">
+          <Col md={2} className="mt-2">
+            <div style={{ width: "100px", height: "100px" }}>
+              <img className="img-thumbnail" style={{ height: '100px' }}
+                src={(formData?.aadhar_pdf_file_view) ? formData?.aadhar_pdf_file_view : formData?.aadhar_pdf_file ? `${baseURL}/static${formData?.aadhar_pdf_file}` : addDoc}
+                alt="User Image"
+                loading="lazy"
+              />
+            </div>
+          </Col>
+          <Col md={5} className="mt-2">
             <label htmlFor="idproof-pan-no">Pan Card Number</label>
             <input
               placeholder="Pan Number"
@@ -62,7 +72,7 @@ const CustomerBasicIdProof = ({ allData }) => {
               onChange={handleInputChange}
             />
           </Col>
-          <Col md={6} className="mt-2">
+          <Col md={5} className="mt-2">
             <label>Upload Pan Card Image</label>
             <div className="form-control p-0 d-flex justify-content-between align-items-center">
               <span className="mx-1">{formData?.pan_pdf_file?.name || formData?.pan_pdf_file || 'Pan Card'}</span>
@@ -80,6 +90,15 @@ const CustomerBasicIdProof = ({ allData }) => {
               >
                 Upload File
               </label>
+            </div>
+          </Col>
+          <Col md={2} className="mt-2">
+            <div style={{ width: "100px", height: "100px" }}>
+              <img className="img-thumbnail" style={{ height: '100px' }}
+                src={(formData?.pan_pdf_file_view) ? formData?.pan_pdf_file_view : formData?.pan_pdf_file ? `${baseURL}/static${formData?.pan_pdf_file}` : addDoc}
+                alt="User Image"
+                loading="lazy"
+              />
             </div>
           </Col>
           {/* <div className="d-flex justify-content-between mt-2">

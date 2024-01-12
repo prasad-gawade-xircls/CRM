@@ -24,6 +24,8 @@ export default function CustomerProfile() {
 
   const { id } = useParams()
 
+  console.log(formData)
+  
   const fetchCustomerData = (id) => {
     const url = new URL(`${baseURL}/customers/merchant/get_view_customer/`)
     const form_data = new FormData()
@@ -41,7 +43,7 @@ export default function CustomerProfile() {
         return response.json()
       })
       .then((resp) => {
-        console.log("Response:", resp.success[0])
+        // console.log("Response:", resp.success[0])
         const newObject = {}
         for (const key in resp.success[0]) {
           if (resp.success[0].hasOwnProperty(key) && resp.success[0][key] !== null) {
@@ -115,7 +117,8 @@ export default function CustomerProfile() {
     } else if (addressType === 'file') {
       setFormData(prevFormData => ({
         ...prevFormData,
-        view_logo_url: URL.createObjectURL(e.target.files[0]),
+        // view_logo_url: URL.createObjectURL(e.target.files[0]),
+        [`${e.target.name}_view`] : URL.createObjectURL(e.target.files[0]),
         [e.target.name]: (e.target.files[0])
       }))
     } else if (addressType) {
@@ -125,8 +128,6 @@ export default function CustomerProfile() {
       }))
     }
   }
-
-  // console.log(formData)
 
   // {"is_edit_url": "/customer/merchant/is_edit/", "cust_id": 57103}   SAVE
 
@@ -151,9 +152,6 @@ export default function CustomerProfile() {
     if (id) {
       form_data.append("customer_id", id) 
     }
-    // for (var key of form_data.entries()) {
-    //   console.log(key[0] + ', ' + key[1]);
-    // }
 
     fetch(url, {
       method: "POST",
