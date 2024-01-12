@@ -8,9 +8,9 @@ const CustomersAddCustomer = ({ allData }) => {
       id,
       formData,
       handleInputChange,
-      handleEmailBlur,
+      handleEmailBlur
       // handleNext,
-      errors
+      // errors
    } = allData
 
    const sourceInputData = [
@@ -130,9 +130,9 @@ const CustomersAddCustomer = ({ allData }) => {
                   </label>
                   <div>
                      <input placeholder="Alternate Mobile Number" type='tel' maxLength={10} id='basicDetails-alt-mobile' name='phone_no2' className="form-control" value={formData?.phone_no2 ?? ''} onChange={handleInputChange} />
-                     <p className={`text-danger text-left m-0 font-small-1 ${errors.phone_no2 ? '' : 'd-none'}`}>
+                     {/* <p className={`text-danger text-left m-0 font-small-1 ${errors.phone_no2 ? '' : 'd-none'}`}>
                         {errors.phone_no2}
-                     </p>
+                     </p> */}
                   </div>
                </Col>
                <Col md={6} lg={4} className="mt-1">
@@ -141,9 +141,9 @@ const CustomersAddCustomer = ({ allData }) => {
                   </label>
                   <div>
                      <input placeholder="Landline Number" type='tel' maxLength={10} id='basicDetails-landline' name='landline1' className="form-control" value={formData?.landline1 ?? ''} onChange={handleInputChange} />
-                     <p className={`text-danger text-left m-0 font-small-1 ${errors.landline1 ? '' : 'd-none'}`}>
-                        {errors.landline1}
-                     </p>
+                     {/* <p className={`text-danger text-left m-0 font-small-1 ${errors.landline1 ? '' : 'd-none'}`}>
+                        {errors.landline1} */}
+                     {/* </p> */}
                   </div>
                </Col>
                <Col md={6} lg={4} className="mt-1">
@@ -152,9 +152,9 @@ const CustomersAddCustomer = ({ allData }) => {
                   </label>
                   <div>
                      <input placeholder="Alternate Landline Number" type='tel' maxLength={10} pattern="[789][0-9]{9}" id='basicDetails-alt-landline' name='landline2' className="form-control" value={formData?.landline2 ?? ''} onChange={handleInputChange} />
-                     <p className={`text-danger text-left m-0 font-small-1 ${errors.landline2 ? '' : 'd-none'}`}>
+                     {/* <p className={`text-danger text-left m-0 font-small-1 ${errors.landline2 ? '' : 'd-none'}`}>
                         {errors.landline2}
-                     </p>
+                     </p> */}
                   </div>
                </Col>
                <Col md={6} lg={4} className="mt-1">

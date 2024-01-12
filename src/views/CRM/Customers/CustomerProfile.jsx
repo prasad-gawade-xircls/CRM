@@ -13,13 +13,12 @@ import CustomerBasicAddress from "./CustomerProfileBasic/CustomerBasicAddress.js
 import CustomerBasicCompanyInfo from "./CustomerProfileBasic/CustomerBasicCompanyInfo.js"
 import CustomerBasicAccount from "./CustomerProfileBasic/CustomerBasicAccount.js"
 import CustomerBasicNav from "./CustomerProfileBasic/CustomerBasicNav.js"
-import { validForm, validateEmail } from "../../Validator/index.js"
+import { validForm, validateEmail } from "@src/views/Validator/index.js"
+import CustomerBasicCompanyInfo2 from "./CustomerProfileBasic/CustomerBasicCompanyInfo2.js"
 
 
-/* eslint-disable */
 export default function CustomerProfile() {
   const [formData, setFormData] = useState({})
-  const [errors, setErrors] = useState({})
   const [currentStep, setCurrentStep] = useState(1)
   const navigate = useNavigate()
 
@@ -43,15 +42,14 @@ export default function CustomerProfile() {
       })
       .then((resp) => {
         console.log("Response:", resp.success[0])
-        const newObject = {};
+        const newObject = {}
         for (const key in resp.success[0]) {
           if (resp.success[0].hasOwnProperty(key) && resp.success[0][key] !== null) {
-            newObject[key] = resp.success[0][key];
+            newObject[key] = resp.success[0][key]
           }
         }
-        // console.log('AfterRemovingNull', newObject);
         setFormData(newObject)
-        const name = newObject?.customer_name.split(' ')
+        const name = newObject?.customer_name ? newObject?.customer_name.split(' ') : ''
         const datePart = newObject?.cust_dob ? newObject?.cust_dob.substring(0, 10) : ''
         setFormData(prefData => ({
           ...prefData,
@@ -62,11 +60,7 @@ export default function CustomerProfile() {
       })
       .catch((error) => {
         console.error("Error:", error)
-        if (error.message === 'Customer already exists') {
-          toast.error('Customer already exists')
-        } else {
-          toast.error('Failed to save customer')
-        }
+        toast.error('Failed to Fetch customer')
       })
   }
 
@@ -80,7 +74,8 @@ export default function CustomerProfile() {
   const handleInputChange = (e, addressType) => {
     // console.log(e)
     if (addressType === undefined) {
-      let { name, value, type, checked } = e.target
+      const { name, type, checked } = e.target
+      let { value } = e.target
       if (name.includes('.')) {
         const [parent, child] = name.split('.')
         setFormData(prevFormData => ({
@@ -136,25 +131,29 @@ export default function CustomerProfile() {
   // {"is_edit_url": "/customer/merchant/is_edit/", "cust_id": 57103}   SAVE
 
   const postData = (btn) => {
-    // console.log(formData)
     const url = new URL(`${baseURL}/customers/merchant/add_customer/`)
     const form_data = new FormData()
     Object.entries(formData).map(([key, value]) => {
       form_data.append(key, value)
     })
-    // formData?.aadhar_pdf_file instanceof Object && console.log('object')
-    formData?.aadhar_pdf_file instanceof Object && form_data.append("is_aadhar_file", '1')
-    formData?.pan_pdf_file instanceof Object && form_data.append("is_pan_file", '1')
-    formData?.user_profile_img instanceof Object && form_data.append("is_user_profile", '1')
+    if (formData?.aadhar_pdf_file instanceof Object) {
+      form_data.append("is_aadhar_file", '1')
+    }
+    if (formData?.pan_pdf_file instanceof Object) {
+      form_data.append("is_pan_file", '1')
+    }
+    if (formData?.user_profile_img instanceof Object) {
+      form_data.append("is_user_profile", '1')
+    }
     form_data.append("pin", 'INsdfsdfsDV')
     form_data.append("entry_point", 'INDV')
     form_data.append("press_btn", btn)
-    id && form_data.append("customer_id", id)
-
-    for (var key of form_data.entries()) {
-      console.log(key[0] + ', ' + key[1]);
+    if (id) {
+      form_data.append("customer_id", id) 
     }
-
+    // for (var key of form_data.entries()) {
+    //   console.log(key[0] + ', ' + key[1]);
+    // }
 
     fetch(url, {
       method: "POST",
@@ -220,9 +219,10 @@ export default function CustomerProfile() {
       message: 'Please enter your phone number',
       type: 'string',
       id: 'phone_no'
-    },
+    }
   ]
 
+  let checkForm = true
   const handleSubmitSection = (event, btn) => {
     event.preventDefault()
     checkForm = validForm(valueToCheck, formData)
@@ -237,7 +237,6 @@ export default function CustomerProfile() {
     }
   }
 
-  let checkForm = true
   const handleNext = async () => {
     checkForm = validForm(valueToCheck, formData)
     if (checkForm) {
@@ -279,7 +278,6 @@ export default function CustomerProfile() {
   const allData = {
     formData,
     currentStep,
-    errors,
     id,
     handleEmailBlur,
     handleInputChange,
@@ -300,7 +298,10 @@ export default function CustomerProfile() {
             <CustomerBasicNav currentStep={currentStep} NavCurrentStep={NavCurrentStep} />
             <form>
               {currentStep === 1 && (
-                <CustomersAddCustomer allData={allData} />
+                <>
+                  <CustomersAddCustomer allData={allData} />
+                  {/* <CustomerBasicCompanyInfo2 allData={allData} /> */}
+                </>
               )}
               {currentStep === 2 && (
                 <PersonalInfo allData={allData} />
@@ -312,7 +313,10 @@ export default function CustomerProfile() {
                 <CustomerBasicAddress allData={allData} />
               )}
               {currentStep === 5 && (
-                <CustomerBasicCompanyInfo allData={allData} />
+                <>
+                  {/* <CustomerBasicCompanyInfo allData={allData} /> */}
+                  <CustomerBasicCompanyInfo2 allData={allData} />
+                </>
               )}
               {currentStep === 6 && (
                 <CustomerBasicAccount allData={allData} />

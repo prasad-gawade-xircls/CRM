@@ -25,7 +25,7 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  // console.log(filteredData)
+  console.log(filteredData)
   // console.log(newCompany)
 
   const fetchCompanyData = async () => {
@@ -565,13 +565,6 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
     {newCompanyPage === 1 && (
       <Row className="">
         <Col md={12} className="mt-2">
-          <div className="form-check mb-1">
-            <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" defaultChecked />
-            <label className="form-check-label" htmlFor="flexCheckChecked">
-              Checked checkbox
-            </label>
-          </div>
-
           <label htmlFor="basicDetails-companyName">Company Name</label>
           <input
             required
@@ -616,7 +609,7 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
           </label>
           <input
             required
-            placeholder="PNA Card No."
+            placeholder="PAN Card No."
             type="text"
             id="basicDetails-panNumber"
             name="company_pancard"
@@ -631,7 +624,6 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
             required
             placeholder="Phone"
             type="tel"
-            pattern="[789][0-9]{9}"
             maxLength={10}
             id="basicDetails-phone"
             name="company_phone"
@@ -644,7 +636,7 @@ const CustomerBasicCompanyInfo = ({ allData }) => {
           <label htmlFor="basicDetails-last-name">Email</label>
           <input
             required
-            placeholder="Last Name"
+            placeholder="Email"
             type="email"
             id="basicDetails-email"
             name="company_email"
